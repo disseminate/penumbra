@@ -93,6 +93,15 @@ function player:ShadowKill()
 end
 
 
+function entity:KillShadow( ply )
+	
+	self:EmitSound( Sound( "npc/stalker/go_alert2.wav" ) );
+	self:Remove();
+	ply:SetMoney( ply:Money() + 1 );
+	
+end
+
+
 function player:LoadData()
 	
 	local sid = self:SteamID();

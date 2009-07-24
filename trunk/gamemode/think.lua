@@ -10,9 +10,7 @@ function GM:Think()
 			
 			if( fEnt:IsShadow() ) then
 				
-				fEnt:EmitSound( Sound( "npc/stalker/go_alert2.wav" ) );
-				fEnt:Remove();
-				v:SetMoney( v:Money() + 1 );
+				fEnt:KillShadow( v );
 				
 			end
 			
@@ -21,6 +19,21 @@ function GM:Think()
 		if( not v:CanUseFlashlight() and v:FlashlightIsOn() ) then
 			
 			v:Flashlight( false );
+			
+		end
+		
+		if( v:FlashlightIsOn() ) then
+			
+			v:SetNWInt( "flashlightpwr", math.Clamp( v:GetNWInt( "flashlightpwr" ) - 0.5, 0, 100 ) );
+			v:SetNWInt( "lastFlashUpdate", CurTime() );
+			
+		else
+			
+			if( CurTime() - v:GetNWInt( "lastFlashUpdate" ) >= 1 ) then
+				
+				v:SetNWInt( "flashlightpwr", math.Clamp( v:GetNWInt( "flashlightpwr" ) + 0.125, 0, 100 ) );
+				
+			end
 			
 		end
 		
@@ -35,9 +48,7 @@ function GM:Think()
 				
 				if( n:IsShadow() ) then
 					
-					n:EmitSound( Sound( "npc/stalker/go_alert2.wav" ) );
-					n:Remove();
-					v:SetMoney( v:Money() + 1 );
+					n:KillShadow( v );
 					
 				end
 				
