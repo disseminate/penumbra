@@ -2,7 +2,7 @@ IllumPositions = { };
 
 function GM:Think()
 	
-	for k, v in pairs( player.GetAll() ) do
+	for _, v in pairs( player.GetAll() ) do
 		
 		local fEnt = v:FlashlightEntity();
 		
@@ -24,10 +24,24 @@ function GM:Think()
 			
 		end
 		
-		if( v:GetTable().IllumR > 0 ) then
+		if( v:GetNWInt( "IllumR" ) > 0 ) then
 			
-			local r = v:GetTable().IllumR;
+			local r = v:GetNWInt( "IllumR" );
 			local pos = v:GetPos();
+			
+			local ents = ents.FindInSphere( pos, r );
+			
+			for _, n in pairs( ents ) do
+				
+				if( n:IsShadow() ) then
+					
+					n:EmitSound( Sound( "npc/stalker/go_alert2.wav" ) );
+					n:Remove();
+					v:SetMoney( v:Money() + 1 );
+					
+				end
+				
+			end
 			
 		end
 		

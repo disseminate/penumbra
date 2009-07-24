@@ -56,10 +56,10 @@ end
 
 function player:IllumSelf( r, t )
 	
-	self:GetTable().IllumR = r;
+	self:SetNWInt( "IllumR", r );
 	
 	timer.Simple( t, function()
-		self:GetTable().IllumR = 0;
+		self:SetNWInt( "IllumR", 0 );
 	end );
 	
 end
