@@ -17,9 +17,13 @@ end
 
 function meta:CanUseFlashlight()
 	
-	if( self:GetActiveWeapon() and self:GetActiveWeapon():GetClass() == "weapon_flashlight" ) then
-		
-		return true;
+	if( self:Alive() ) then
+	
+		if( self:GetActiveWeapon() and self:GetActiveWeapon():GetClass() == "weapon_flashlight" ) then
+			
+			return true;
+			
+		end
 		
 	end
 	
