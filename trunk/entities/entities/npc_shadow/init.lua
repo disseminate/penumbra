@@ -11,16 +11,21 @@ function ENT:Initialize()
 	self:SetHullSizeNormal();
 	self:SetSolid( SOLID_BBOX );
 	self:SetMoveType( MOVETYPE_STEP );
-	self:CapabilitiesAdd( CAP_MOVE_GROUND | CAP_SQUAD | CAP_MOVE_JUMP );
+	self:CapabilitiesAdd( CAP_MOVE_GROUND );
 	self:SetMaxYawSpeed( 5000 );
 	self:SetHealth( 100 ); -- idk
 	self:SetColor( 255, 255, 255, 50 );
 	self:SetMaterial( "models/weapons/v_stunbaton/w_shaft01a" );
-	
    
 end
 
 function ENT:Think()
+	
+	for k, v in pairs( player.GetAll() ) do
+		
+		self:AddEntityRelationship( v, 1, 10 );
+		
+	end
 	
 	if( self:GetEnemy() ) then
 		

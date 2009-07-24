@@ -26,7 +26,6 @@ function ents.SpawnShadow( pos )
 	local npc = ents.Create( "npc_shadow" );
 		npc:SetPos( pos );
 		npc:Spawn();
-		npc:Activate();
 	
 end
 
