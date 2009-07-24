@@ -14,7 +14,7 @@ function ENT:Initialize()
 	self:CapabilitiesAdd( CAP_MOVE_GROUND );
 	self:SetMaxYawSpeed( 5000 );
 	self:SetHealth( 100 ); -- idk
-	self:SetColor( 255, 255, 255, 50 );
+	self:SetColor( 255, 255, 255, 100 );
 	self:SetMaterial( "models/weapons/v_stunbaton/w_shaft01a" );
    
 end
@@ -30,6 +30,14 @@ function ENT:Think()
 	if( self:GetEnemy() ) then
 		
 		self:UpdateEnemyMemory( self:GetEnemy(), self:GetEnemy():GetPos() );
+		
+		if( self:OnGround() and self:GetEnemy():GetPos():Distance( self:GetPos() ) > 250 and self:GetEnemy():GetPos():Distance( self:GetPos() ) < 500 ) then
+			
+			local ppos = self:GetEnemy():GetPos() - self:GetPos();
+			local epos = Vector( ppos.x * 100, ppos.y * 100, 250 );
+			self:SetVelocity( epos );
+			
+		end
 		
 	end
 	
