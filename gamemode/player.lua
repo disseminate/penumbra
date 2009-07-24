@@ -3,6 +3,8 @@ function GM:PlayerInitialSpawn( ply )
 	ply:SetTeam( TEAM_UNASSIGNED )
 	ply:SetMoney( 0 );
 	ply:SetNWInt( "IllumR", r );
+	ply:SetNWInt( "flashlightpwr", 100 );
+	ply:SetNWInt( "lastFlashUpdate", 0 );
 	
 	ply:LoadData();
 	
@@ -20,7 +22,7 @@ function GM:PlayerLoadout( ply )
 	
 	ply:Give( "weapon_flashlight" );
 	ply:Give( "weapon_glowstick" );
-	ply:Give( "weapon_blblblbtest" );
+	ply:Give( "weapon_flashbang" );
 	
 end
 
@@ -29,6 +31,8 @@ function GM:PlayerDeathSound() return true end
 function GM:DoPlayerDeath( ply, attacker, dmginfo )
 	
 	ply:SetNWInt( "IllumR", 0 );
+	ply:SetNWInt( "flashlightpwr", 100 );
+	ply:SetNWInt( "lastFlashUpdate", 0 );
 	
 	ply:CreateRagdoll() -- Below is base code
 	
