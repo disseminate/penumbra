@@ -1,0 +1,13 @@
+"Gamemode"
+{
+	"name"			"Penumbra"
+	"version"		"1.0"
+
+	"author_name"	"Disseminate"
+	"author_email"	""
+	"author_url"	""
+	
+	"icon"			""
+	"info"			""
+	"hide"			"0"
+}
