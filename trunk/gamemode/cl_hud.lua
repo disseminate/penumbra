@@ -26,7 +26,7 @@ function DrawMoney()
 	surface.SetDrawColor( 0, 0, 0, 100 );
 	surface.SetTextColor( 255, 255, 255, 255 );
 	
-	local money = "$" .. LocalPlayer():Money();
+	local money = LocalPlayer():Money() .. " ills";
 	local x, y = surface.GetTextSize( money );
 	
 	surface.DrawRect( 0, 200, x + 50, y + 20 );
