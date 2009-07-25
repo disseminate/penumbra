@@ -101,7 +101,8 @@ end
 
 function GM:ShouldCollide( ent1, ent2 )
 	
-	if( ent1:IsShadow() and ent2:IsShadow() ) then return false end
+	if( ent1:IsShadow() ) then return false end
+	if( ent2:IsShadow() ) then return false end
 	
 	return true;
 	
