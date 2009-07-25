@@ -47,6 +47,58 @@ function player:FlashlightEntity()
 			
 		end
 		
+		local trace = { };
+		trace.start = self:EyePos();
+		trace.endpos = trace.start + self:GetAimVector() * 150 + Vector( 0, 0, 75 );
+		trace.filter = self;
+		
+		local tr = util.TraceLine( trace );
+		
+		if( tr.Entity and tr.Entity:IsValid() ) then
+			
+			return tr.Entity;
+			
+		end
+		
+		local trace = { };
+		trace.start = self:EyePos();
+		trace.endpos = trace.start + self:GetAimVector() * 150 + Vector( 0, 0, -75 );
+		trace.filter = self;
+		
+		local tr = util.TraceLine( trace );
+		
+		if( tr.Entity and tr.Entity:IsValid() ) then
+			
+			return tr.Entity;
+			
+		end
+		
+		local trace = { };
+		trace.start = self:EyePos();
+		trace.endpos = trace.start + self:GetAimVector() * 150 + self:GetRight() * 75;
+		trace.filter = self;
+		
+		local tr = util.TraceLine( trace );
+		
+		if( tr.Entity and tr.Entity:IsValid() ) then
+			
+			return tr.Entity;
+			
+		end
+		
+		local trace = { };
+		trace.start = self:EyePos();
+		trace.endpos = trace.start + self:GetAimVector() * 150 + self:GetRight() * -75;
+		trace.filter = self;
+		
+		local tr = util.TraceLine( trace );
+		
+		if( tr.Entity and tr.Entity:IsValid() ) then
+			
+			return tr.Entity;
+			
+		end
+		
 	end
 	
 	return;
@@ -98,20 +150,35 @@ function entity:KillShadow( ply )
 	self:EmitSound( Sound( "npc/stalker/go_alert2.wav" ) );
 	self:Remove();
 	ply:SetMoney( ply:Money() + 1 );
+	ply:SaveData();
+	
+end
+
+function player:SaveExists()
+	
+	local sid = string.gsub( string.gsub( self:SteamID(), ":", "" ), "_", "" );
+	
+	if( file.Exists( "penumbra/" .. sid .. ".txt" ) ) then
+		
+		return true;
+		
+	end
+	
+	return false;
 	
 end
 
 
 function player:LoadData()
 	
-	local sid = self:SteamID();
+	local sid = string.gsub( string.gsub( self:SteamID(), ":", "" ), "_", "" );
 	
-	if( file.Exists( "penumbra/" .. sid .. ".txt" ) ) then
+	if( self:SaveExists() ) then
 		
 		local fstr = file.Read( "penumbra/" .. sid .. ".txt" );
-		local ftab = string.Explode( fstr, "$" );
+		local ftab = string.Explode( "$", fstr );
 		
-		self:SetMoney( tonumber( ftab[0] ) );
+		self:SetMoney( tonumber( ftab[1] ) );
 		
 	end
 	
@@ -120,10 +187,13 @@ end
 
 function player:SaveData()
 	
-	local sid = self:SteamID();
+	local sid = string.gsub( string.gsub( self:SteamID(), ":", "" ), "_", "" );
 	
-	local str = self:Money() .. "$" .. "lol";
+	local str = {
+		self:Money(),
+		"lol"
+	};
 	
-	file.Write( "penumbra/" .. sid .. ".txt", str );
+	file.Write( "penumbra/" .. sid .. ".txt", string.Implode( "$", str ) );
 	
 end

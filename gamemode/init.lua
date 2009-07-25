@@ -56,6 +56,17 @@ function GM:Initialize()
 				DAY = true;
 				SEC = 0;
 				
+				for k, v in pairs( ents.GetAll() ) do
+					
+					if( v:IsShadow() ) then
+						
+						v:EmitSound( Sound( "npc/stalker/go_alert2.wav" ) );
+						v:Remove();
+						
+					end
+					
+				end
+				
 				for k, v in pairs( player.GetAll() ) do
 				
 					umsg.Start( "msgUpdateDay", v );

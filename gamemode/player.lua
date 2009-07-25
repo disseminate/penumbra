@@ -6,6 +6,16 @@ function GM:PlayerInitialSpawn( ply )
 	ply:SetNWInt( "flashlightpwr", 100 );
 	ply:SetNWInt( "lastFlashUpdate", 0 );
 	
+	if( ply:SaveExists() ) then
+		
+		ply:PrintMessage( 3, "Welcome to Penumbra for the first time, " .. ply:Nick() .. "." );
+		
+	else
+		
+		ply:PrintMessage( 3, "Welcome to Penumbra, " .. ply:Nick() .. "." );
+		
+	end
+	
 	ply:LoadData();
 	
 end

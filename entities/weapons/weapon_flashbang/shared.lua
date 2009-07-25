@@ -30,6 +30,7 @@ function SWEP:PrimaryAttack()
 		local gren = ents.Create( "ent_flash" );
 			gren:SetPos( self.Owner:EyePos() + self.Owner:GetAimVector() * 50 );
 			gren:Spawn();
+			gren.Owner = self.Owner;
 			
 			local phys = gren:GetPhysicsObject();
 			phys:ApplyForceCenter( self.Owner:GetAimVector() * 700 );
