@@ -33,6 +33,18 @@ function ENT:Think()
 		
 	end
 	
+	
+	local ents = ents.FindInSphere( self:GetPos(), 16 ); -- Todo - optimize this
+	for k, v in pairs( ents ) do
+		
+		if( v:IsPlayer() and v:Alive() ) then
+			
+			v:ShadowKill();
+			
+		end
+		
+	end
+	
 	self:FindEnemy();
 
 end
@@ -85,15 +97,5 @@ function ENT:FindClosestPly( enttab )
 	end
 	
 	return pl;
-	
-end
-
-function ENT:Touch( ent )
-	
-	if( ent:IsPlayer() ) then
-		
-		ent:ShadowKill();
-		
-	end
 	
 end
