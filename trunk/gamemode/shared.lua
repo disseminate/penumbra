@@ -1,4 +1,4 @@
-DeriveGamemode( "base" );
+DeriveGamemode( "sandbox" );
 
 GM.Name = "Penumbra";
 GM.Author = "Disseminate";

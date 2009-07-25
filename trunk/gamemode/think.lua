@@ -24,7 +24,7 @@ function GM:Think()
 		
 		if( v:FlashlightIsOn() ) then
 			
-			v:SetNWInt( "flashlightpwr", math.Clamp( v:GetNWInt( "flashlightpwr" ) - 0.5, 0, 100 ) );
+			v:SetNWInt( "flashlightpwr", math.Clamp( v:GetNWInt( "flashlightpwr" ) - 0.25, 0, 100 ) );
 			v:SetNWInt( "lastFlashUpdate", CurTime() );
 			
 		else
