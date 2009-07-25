@@ -1,5 +1,6 @@
 surface.CreateFont( "coolvetica", 40, 100, true, false, "PenumbraTextLarge" );
-surface.CreateFont( "coolvetica", 12, 100, true, false, "PenumbraTextTiny" );
+surface.CreateFont( "coolvetica", 20, 100, true, false, "PenumbraText" );
+surface.CreateFont( "coolvetica", 12, 100, true, false, "PenumbraTextSmall" );
 
 function GM:HUDShouldDraw( name )
 	
@@ -43,6 +44,31 @@ function DrawMoney()
 	
 end
 
+function DrawTime()
+	
+	surface.SetFont( "PenumbraText" );
+	surface.SetDrawColor( 0, 0, 0, 100 );
+	surface.SetTextColor( 255, 255, 255, 255 );
+	
+	local t = "";
+	if( DAY ) then
+		
+		t = "Day";
+	
+	else
+		
+		t = "Night";
+		
+	end
+	
+	local x, y = surface.GetTextSize( t );
+	
+	surface.DrawRect( 0, 300, x + 30, y + 12 );
+	surface.SetTextPos( 15, 306 );
+	surface.DrawText( t );
+	
+end
+
 function DrawFlashlight()
 	
 	draw.ProgressBar( 2, 0, ScrH() - 100, 200, 12, LocalPlayer():GetNWInt( "flashlightpwr" ) / 100, Color( 0, 0, 0, 200 ), Color( 220, 220, 220, 255 ) );
@@ -53,6 +79,7 @@ end
 function GM:HUDPaint()
 	
 	DrawMoney();
+	DrawTime();
 	DrawFlashlight();
 	
 end

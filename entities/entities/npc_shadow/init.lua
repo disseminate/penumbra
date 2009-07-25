@@ -31,14 +31,6 @@ function ENT:Think()
 		
 		self:UpdateEnemyMemory( self:GetEnemy(), self:GetEnemy():GetPos() );
 		
-		if( self:OnGround() and self:GetEnemy():GetPos():Distance( self:GetPos() ) > 250 and self:GetEnemy():GetPos():Distance( self:GetPos() ) < 500 ) then
-			
-			local ppos = self:GetEnemy():GetPos() - self:GetPos();
-			local epos = Vector( ppos.x * 100, ppos.y * 100, 250 );
-			self:SetVelocity( epos );
-			
-		end
-		
 	end
 	
 	self:FindEnemy();
