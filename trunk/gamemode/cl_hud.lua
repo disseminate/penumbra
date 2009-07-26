@@ -32,19 +32,47 @@ end
 function DrawColorMod()
 	
 	if( DAY ) then
-	
+		
+		local mul = 1;
+		
+		if( CurTime() - DAY_LASTTRANS <= 3 ) then
+		
+			local timeSinceLast = math.Clamp( CurTime() - DAY_LASTTRANS, 0, 3 );
+			mul = timeSinceLast / 3;
+			
+		end
+		
 		local tab = {}
-		 
+		
 		tab[ "$pp_colour_addr" ] = 0;
 		tab[ "$pp_colour_addg" ] = 0;
 		tab[ "$pp_colour_addb" ] = 0;
-		tab[ "$pp_colour_brightness" ] = 0.06;
-		tab[ "$pp_colour_contrast" ] = 2.54;
+		tab[ "$pp_colour_brightness" ] = 0.06 * mul;
+		tab[ "$pp_colour_contrast" ] = 1 + ( 1.54 * mul );
 		tab[ "$pp_colour_colour" ] = 1;
 		tab[ "$pp_colour_mulr" ] = 0;
 		tab[ "$pp_colour_mulg" ] = 0; 
 		tab[ "$pp_colour_mulb" ] = 0;
-		 
+		
+		DrawColorModify( tab );
+		
+	elseif( CurTime() - DAY_LASTTRANS <= 3 ) then
+		
+		local timeSinceLast = math.Clamp( CurTime() - DAY_LASTTRANS, 0, 3 );
+		local mul = ( -timeSinceLast + 3 ) / 3;
+		
+		local tab = {}
+		
+		tab[ "$pp_colour_addr" ] = 0;
+		tab[ "$pp_colour_addg" ] = 0;
+		tab[ "$pp_colour_addb" ] = 0;
+		tab[ "$pp_colour_brightness" ] = 0.06 * mul;
+		tab[ "$pp_colour_contrast" ] = 1 + ( 1.54 * mul );
+		tab[ "$pp_colour_colour" ] = 1;
+		tab[ "$pp_colour_mulr" ] = 0;
+		tab[ "$pp_colour_mulg" ] = 0; 
+		tab[ "$pp_colour_mulb" ] = 0;
+		
 		DrawColorModify( tab );
 		
 	end
