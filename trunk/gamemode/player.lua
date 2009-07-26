@@ -5,6 +5,7 @@ function GM:PlayerInitialSpawn( ply )
 	ply:SetNWInt( "IllumR", r );
 	ply:SetNWInt( "flashlightpwr", 100 );
 	ply:SetNWInt( "lastFlashUpdate", 0 );
+	ply:SetNWInt( "LastGlowstick", -30 );
 	
 	if( not ply:SaveExists() ) then
 		
@@ -43,6 +44,7 @@ function GM:DoPlayerDeath( ply, attacker, dmginfo )
 	ply:SetNWInt( "IllumR", 0 );
 	ply:SetNWInt( "flashlightpwr", 100 );
 	ply:SetNWInt( "lastFlashUpdate", 0 );
+	ply:SetNWInt( "LastGlowstick", -30 );
 	
 	ply:CreateRagdoll() -- Below is base code
 	

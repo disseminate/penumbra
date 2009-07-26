@@ -126,11 +126,43 @@ function DrawFlashlight()
 	
 end
 
+function DrawMiscWepData() -- This code SUCKS
+	
+	if( LocalPlayer():GetActiveWeapon() ) then
+		
+		if( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_glowstick" ) then
+			
+			local mul = 1;
+			local LastGlow = LocalPlayer():GetNWInt( "LastGlowstick" );
+			
+			if( CurTime() - LastGlow <= 30 and CurTime() - LastGlow >= 0 ) then
+				
+				mul = ( 30 + -1 * ( CurTime() - LastGlow ) ) / 30;
+				
+			end
+			
+			draw.ProgressBar( 2, 0, ScrH() - 80, 200, 12, mul, Color( 0, 0, 0, 200 ), Color( 200, 0, 0, 255 ) );
+			draw.DrawText( math.Round( mul * 30 ) .. "s", "PenumbraTextSmall", 5, ScrH() - 79, Color( 0, 0, 0, 255 ), 0 );
+			
+		elseif( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_laserpoint" ) then
+			
+			local mul = LocalPlayer():GetActiveWeapon().AmmoLeft / 10;
+			
+			draw.ProgressBar( 2, 0, ScrH() - 80, 200, 12, mul, Color( 0, 0, 0, 200 ), Color( 0, 200, 255, 255 ) );
+			draw.DrawText( mul * 10 .. "/10", "PenumbraTextSmall", 5, ScrH() - 79, Color( 0, 0, 0, 255 ), 0 );
+			
+		end
+		
+	end
+	
+end
+
 function GM:HUDPaint()
 	
 	DrawColorMod();
 	DrawMoney();
 	DrawTime();
 	DrawFlashlight();
+	DrawMiscWepData();
 	
 end
