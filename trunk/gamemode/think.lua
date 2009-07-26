@@ -58,4 +58,20 @@ function GM:Think()
 		
 	end
 	
+	for k, v in pairs( IllumPositions ) do
+		
+		local ents = ents.FindInSphere( v[2], v[3] );
+		
+		for m, n in pairs( ents ) do
+			
+			if( n:IsShadow() ) then
+				
+				n:KillShadow( v[1] );
+				
+			end
+			
+		end
+		
+	end
+	
 end

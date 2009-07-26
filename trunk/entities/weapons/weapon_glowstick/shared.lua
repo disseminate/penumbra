@@ -31,6 +31,16 @@ function SWEP:PrimaryAttack()
 		if( not self.UsedUp ) then
 		
 			self.Owner:IllumSelf( 150, 30 );
+			
+			local snds = {
+				"weapons/stunstick/spark1.wav",
+				"weapons/stunstick/spark2.wav",
+				"weapons/stunstick/spark3.wav"
+			}
+			self.Owner:EmitSound( Sound( snds[math.random( 1, #snds )] ) );
+			self.Weapon:SendWeaponAnim( ACT_VM_PRIMARYATTACK );
+			self.Owner:SetAnimation( PLAYER_ATTACK1 );
+			
 			self.UsedUp = true;
 			
 		end

@@ -23,4 +23,27 @@ function GM:Think()
 		
 	end
 	
+	for _, v in pairs( ents.GetAll() ) do
+		
+		if( v:GetClass() == "env_fire" ) then
+			
+			local dlight = DynamicLight( v:EntIndex() );
+			
+			if ( dlight ) then
+				
+				dlight.Pos = v:GetPos();
+				dlight.r = 255;
+				dlight.g = 200;
+				dlight.b = 0;
+				dlight.Brightness = 8;
+				dlight.Size = 200;
+				dlight.Decay = 200 * 5;
+				dlight.DieTime = CurTime() + 0.1;
+				
+			end
+			
+		end
+		
+	end
+	
 end

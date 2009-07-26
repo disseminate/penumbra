@@ -117,9 +117,11 @@ function player:IllumSelf( r, t )
 end
 
 
-function entity:IllumSelf( r, t, pos )
+function entity:IllumSelf( ply, r, t )
 	
-	table.insert( IllumPositions, { pos, r } );
+	local pos = self:GetPos();
+	
+	table.insert( IllumPositions, { ply, pos, r } );
 	
 	timer.Simple( t, function()
 		table.remove( IllumPositions, table.FindVal( IllumPositions, { pos, r } ) );
