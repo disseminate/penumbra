@@ -41,6 +41,8 @@ function SWEP:PrimaryAttack()
 			self.Weapon:SendWeaponAnim( ACT_VM_PRIMARYATTACK );
 			self.Owner:SetAnimation( PLAYER_ATTACK1 );
 			
+			self.Owner:SetNWInt( "LastGlowstick", CurTime() );
+			
 			self.UsedUp = true;
 			
 		end
