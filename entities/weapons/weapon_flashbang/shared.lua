@@ -10,7 +10,7 @@ SWEP.PrintName = "Flashbang";
 
 if( CLIENT ) then
 	
-	SWEP.Slot = 2;
+	SWEP.Slot = 3;
 	SWEP.SlotPos = 1;
 	SWEP.ViewModelFOV = 50;
 	SWEP.ViewModelFlip		= false	
