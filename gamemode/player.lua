@@ -6,7 +6,7 @@ function GM:PlayerInitialSpawn( ply )
 	ply:SetNWInt( "flashlightpwr", 100 );
 	ply:SetNWInt( "lastFlashUpdate", 0 );
 	
-	if( ply:SaveExists() ) then
+	if( not ply:SaveExists() ) then
 		
 		ply:PrintMessage( 3, "Welcome to Penumbra for the first time, " .. ply:Nick() .. "." );
 		
@@ -31,8 +31,8 @@ end
 function GM:PlayerLoadout( ply )
 	
 	ply:Give( "weapon_flashlight" );
-	ply:Give( "weapon_glowstick" );
-	ply:Give( "weapon_flashbang" );
+	--ply:Give( "weapon_glowstick" );
+	--ply:Give( "weapon_flashbang" );
 	
 end
 

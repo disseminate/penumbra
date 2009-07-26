@@ -137,7 +137,7 @@ end
 
 function player:ShadowKill()
 	
-	self:SetMoney( self:Money() - 15 );
+	self:SetMoney( self:Money() - 20 );
 	self:PrintMessage( 3, "A shadow has touched you!" );
 	self:SaveData();
 	self:Kill();

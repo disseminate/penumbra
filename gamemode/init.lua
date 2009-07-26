@@ -4,11 +4,13 @@ AddCSLuaFile( "cl_init.lua" );
 AddCSLuaFile( "cl_binds.lua" );
 AddCSLuaFile( "cl_hud.lua" );
 AddCSLuaFile( "cl_think.lua" );
+AddCSLuaFile( "cl_buymenu.lua" );
 
 include( "shared.lua" );
 include( "meta.lua" );
 include( "think.lua" );
 include( "player.lua" );
+include( "buymenu.lua" );
 
 MAP = { }
 include( "spawnpoints/" .. string.lower( game.GetMap() ) .. ".lua" );
@@ -50,7 +52,7 @@ function GM:Initialize()
 				
 				for k, v in pairs( player.GetAll() ) do
 					
-					v:PrintMessage( 3, "Day!" );
+					v:PrintMessage( 3, "Day! Use /buy to buy new weapons." );
 					
 				end
 				DAY = true;
@@ -116,5 +118,25 @@ function GM:ShouldCollide( ent1, ent2 )
 	if( ent2:IsShadow() ) then return false end
 	
 	return true;
+	
+end
+
+
+function GM:PlayerSay( ply, text, toall )
+	
+	if( string.lower( string.sub( text, 1, 4 ) ) == "/buy" ) then
+		
+		if( DAY ) then
+			
+			umsg.Start( "msgBuyMenu", ply );
+			umsg.End();
+			
+		end
+		
+		return "";
+		
+	end
+	
+	return text;
 	
 end
