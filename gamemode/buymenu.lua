@@ -34,8 +34,17 @@ function buyItem( ply, cmd, args )
 			
 		end
 		
+		if( ply:HasWeapon( wep ) ) then
+			
+			ply:PrintMessage( 3, "You already have this!" );
+			return;
+			
+		end
+		
 		ply:SetMoney( ply:Money() - amt );
 		ply:Give( wep );
+		itemdata[6]( ply );
+		ply:SaveData();
 		ply:PrintMessage( 3, "You recieved a " .. name .. "." );
 		
 	else

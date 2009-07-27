@@ -52,7 +52,23 @@ function GM:Initialize()
 				
 				for k, v in pairs( player.GetAll() ) do
 					
-					v:PrintMessage( 3, "Day! Use /buy to buy new weapons." );
+					v:PrintMessage( 3, "Day! Press F3 to buy new weapons." );
+					
+					if( v.HasLaserPointer ) then
+						v:Give( "weapon_laserpoint" );
+					end
+					
+					if( v.HasGlowstick ) then
+						v:Give( "weapon_glowstick" );
+					end
+					
+					if( v.HasFlashbang ) then
+						v:Give( "weapon_flashbang" );
+					end
+					
+					if( v.HasMolotov ) then
+						v:Give( "weapon_molotov" );
+					end
 					
 				end
 				DAY = true;
@@ -118,25 +134,5 @@ function GM:ShouldCollide( ent1, ent2 )
 	if( ent2:IsShadow() ) then return false end
 	
 	return true;
-	
-end
-
-
-function GM:PlayerSay( ply, text, toall )
-	
-	if( string.lower( string.sub( text, 1, 4 ) ) == "/buy" ) then
-		
-		if( DAY ) then
-			
-			umsg.Start( "msgBuyMenu", ply );
-			umsg.End();
-			
-		end
-		
-		return "";
-		
-	end
-	
-	return text;
 	
 end

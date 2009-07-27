@@ -128,7 +128,7 @@ end
 
 function DrawMiscWepData() -- This code SUCKS
 	
-	if( LocalPlayer():GetActiveWeapon() ) then
+	if( LocalPlayer():GetActiveWeapon() and LocalPlayer():Alive() ) then
 		
 		if( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_glowstick" ) then
 			

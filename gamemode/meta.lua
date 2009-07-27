@@ -139,7 +139,8 @@ end
 
 function player:ShadowKill()
 	
-	self:SetMoney( self:Money() - 20 );
+	self:SetMoney( self:Money() - 10 );
+	if( self:Money() < 0 ) then self:SetMoney( 0 ) end
 	self:PrintMessage( 3, "A shadow has touched you!" );
 	self:SaveData();
 	self:Kill();
@@ -181,6 +182,10 @@ function player:LoadData()
 		local ftab = string.Explode( "$", fstr );
 		
 		self:SetMoney( tonumber( ftab[1] ) );
+		self.HasLaserPointer = tobool( ftab[2] );
+		self.HasGlowstick = tobool( ftab[3] );
+		self.HasFlashbang = tobool( ftab[4] );
+		self.HasMolotov = tobool( ftab[5] );
 		
 	end
 	
@@ -193,7 +198,10 @@ function player:SaveData()
 	
 	local str = {
 		self:Money(),
-		"lol"
+		tostring( self.HasLaserPointer ),
+		tostring( self.HasGlowstick ),
+		tostring( self.HasFlashbang ),
+		tostring( self.HasMolotov )
 	};
 	
 	file.Write( "penumbra/" .. sid .. ".txt", string.Implode( "$", str ) );

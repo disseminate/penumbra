@@ -7,6 +7,11 @@ function GM:PlayerInitialSpawn( ply )
 	ply:SetNWInt( "lastFlashUpdate", 0 );
 	ply:SetNWInt( "LastGlowstick", -30 );
 	
+	ply.HasLaserPointer = false;
+	ply.HasGlowstick = false;
+	ply.HasFlashbang = false;
+	ply.HasMolotov = false;
+	
 	if( not ply:SaveExists() ) then
 		
 		ply:PrintMessage( 3, "Welcome to Penumbra for the first time, " .. ply:Nick() .. "." );
@@ -32,8 +37,17 @@ end
 function GM:PlayerLoadout( ply )
 	
 	ply:Give( "weapon_flashlight" );
-	--ply:Give( "weapon_glowstick" );
-	--ply:Give( "weapon_flashbang" );
+	
+end
+
+function GM:ShowSpare1( ply )
+	
+	if( DAY ) then
+		
+		umsg.Start( "msgBuyMenu", ply );
+		umsg.End();
+		
+	end
 	
 end
 
