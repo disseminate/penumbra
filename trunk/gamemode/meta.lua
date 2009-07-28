@@ -149,7 +149,13 @@ end
 
 
 function entity:KillShadow( ply )
-	
+	--[[
+	local effectdata = EffectData();
+		effectdata:SetStart( self:GetPos() );
+		effectdata:SetOrigin( self:GetPos() );
+		effectdata:SetScale( 1 );
+	util.Effect( "shadowblast", effectdata );
+	--]]
 	self:EmitSound( Sound( "npc/stalker/go_alert2.wav" ) );
 	self:Remove();
 	ply:SetMoney( ply:Money() + 1 );

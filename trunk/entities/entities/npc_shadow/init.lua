@@ -14,7 +14,7 @@ function ENT:Initialize()
 	self:CapabilitiesAdd( CAP_MOVE_GROUND );
 	self:SetMaxYawSpeed( 5000 );
 	self:SetHealth( 100 ); -- idk
-	self:SetColor( 255, 255, 255, 100 );
+	self:SetColor( 255, 255, 255, 50 );
 	self:SetMaterial( "models/weapons/v_stunbaton/w_shaft01a" );
    
 end

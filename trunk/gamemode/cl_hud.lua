@@ -1,6 +1,5 @@
 surface.CreateFont( "coolvetica", 40, 100, true, false, "PenumbraTextLarge" );
 surface.CreateFont( "coolvetica", 20, 100, true, false, "PenumbraText" );
-surface.CreateFont( "coolvetica", 12, 100, true, false, "PenumbraTextSmall" );
 
 function GM:HUDShouldDraw( name )
 	
@@ -26,6 +25,19 @@ function draw.ProgressBar( r, x, y, w, h, val, bg1, bg2 )
 	
 	draw.RoundedBox( r, x, y, w, h, bg1 );
 	draw.RoundedBox( r, x + 2, y + 2, ( w - 4 ) * val, h - 4, bg2 );
+	
+end
+
+function draw.GradBox( x, y, w, h, bg1, bg2 )
+	
+	local r1, g1, b1, a1 = bg2.r, bg2.g, bg2.b, bg2.a;
+	local r2, g2, b2, a2 = bg1.r, bg1.g, bg1.b, bg1.a;
+	local ri, gi, bi, ai = ( ( r2 - r1 ) / h ), ( ( g2 - g1 ) / h ), ( ( b2 - b1 ) / h ), ( ( a2 - a1 ) / h );
+	for i = 1, h do
+		
+		draw.RoundedBox( 0, x, y + i, w, 1, Color( ri * i, gi * i, bi * i, ai * i ) );
+		
+	end
 	
 end
 
@@ -96,7 +108,7 @@ end
 
 function DrawTime()
 	
-	surface.SetFont( "PenumbraText" );
+	surface.SetFont( "PenumbraTextLarge" );
 	surface.SetDrawColor( 0, 0, 0, 100 );
 	surface.SetTextColor( 255, 255, 255, 255 );
 	
@@ -113,24 +125,22 @@ function DrawTime()
 	
 	local x, y = surface.GetTextSize( t );
 	
-	surface.DrawRect( 0, 300, x + 30, y + 12 );
-	surface.SetTextPos( 15, 306 );
+	surface.DrawRect( ScrW() - x - 50, 200, x + 50, y + 20 );
+	surface.SetTextPos( ScrW() - x - 25, 210 );
 	surface.DrawText( t );
 	
 end
 
-function DrawFlashlight()
-	
-	draw.ProgressBar( 2, 0, ScrH() - 100, 200, 12, LocalPlayer():GetNWInt( "flashlightpwr" ) / 100, Color( 0, 0, 0, 200 ), Color( 220, 220, 220, 255 ) );
-	draw.DrawText( math.Round( LocalPlayer():GetNWInt( "flashlightpwr" ) ) .. "%", "PenumbraTextSmall", 5, ScrH() - 99, Color( 0, 0, 0, 255 ), 0 );
-	
-end
-
-function DrawMiscWepData() -- This code SUCKS
+function DrawWepData() -- This code SUCKS ( as in sucks )
 	
 	if( LocalPlayer():GetActiveWeapon() and LocalPlayer():Alive() ) then
 		
-		if( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_glowstick" ) then
+		if( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_flashlight" ) then
+			
+			draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, LocalPlayer():GetNWInt( "flashlightpwr" ) / 100, Color( 0, 0, 0, 200 ), Color( 220, 220, 220, 255 ) );
+			draw.DrawText( math.Round( LocalPlayer():GetNWInt( "flashlightpwr" ) ) .. "%", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
+			
+		elseif( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_glowstick" ) then
 			
 			local mul = 1;
 			local LastGlow = LocalPlayer():GetNWInt( "LastGlowstick" );
@@ -141,17 +151,34 @@ function DrawMiscWepData() -- This code SUCKS
 				
 			end
 			
-			draw.ProgressBar( 2, 0, ScrH() - 80, 200, 12, mul, Color( 0, 0, 0, 200 ), Color( 200, 0, 0, 255 ) );
-			draw.DrawText( math.Round( mul * 30 ) .. "s", "PenumbraTextSmall", 5, ScrH() - 79, Color( 0, 0, 0, 255 ), 0 );
+			draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 200, 0, 0, 255 ) );
+			draw.DrawText( math.Round( mul * 30 ) .. "s", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
 			
 		elseif( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_laserpoint" ) then
 			
 			local mul = LocalPlayer():GetActiveWeapon().AmmoLeft / 10;
 			
-			draw.ProgressBar( 2, 0, ScrH() - 80, 200, 12, mul, Color( 0, 0, 0, 200 ), Color( 0, 200, 255, 255 ) );
-			draw.DrawText( mul * 10 .. "/10", "PenumbraTextSmall", 5, ScrH() - 79, Color( 0, 0, 0, 255 ), 0 );
+			draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 0, 200, 255, 255 ) );
+			draw.DrawText( mul * 10 .. "/10", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
 			
 		end
+		
+	end
+	
+end
+
+function DrawPlayerInfo()
+	
+	local tr = LocalPlayer():GetEyeTrace();
+	
+	if( tr.Entity and tr.Entity:IsPlayer() ) then
+		
+		local nick = tr.Entity:Nick();
+		local ills = tr.Entity:Money();
+		local pos = tr.Entity:EyePos():ToScreen();
+		
+		draw.DrawText( nick, "PenumbraTextLarge", pos.x, pos.y, Color( 255, 255, 255, 255 ), 1 );
+		draw.DrawText( ills .. " ills", "PenumbraText", pos.x, pos.y + 35, Color( 255, 255, 255, 255 ), 1 );
 		
 	end
 	
@@ -162,7 +189,7 @@ function GM:HUDPaint()
 	DrawColorMod();
 	DrawMoney();
 	DrawTime();
-	DrawFlashlight();
-	DrawMiscWepData();
+	DrawWepData();
+	DrawPlayerInfo();
 	
 end
