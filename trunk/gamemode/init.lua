@@ -1,5 +1,4 @@
 AddCSLuaFile( "shared.lua" );
-AddCSLuaFile( "shared_meta.lua" );
 AddCSLuaFile( "cl_init.lua" );
 AddCSLuaFile( "cl_binds.lua" );
 AddCSLuaFile( "cl_hud.lua" );
@@ -11,6 +10,8 @@ include( "meta.lua" );
 include( "think.lua" );
 include( "player.lua" );
 include( "buymenu.lua" );
+
+resource.AddFile( "materials/sprites/shadow.vmt" );
 
 MAP = { }
 include( "spawnpoints/" .. string.lower( game.GetMap() ) .. ".lua" );

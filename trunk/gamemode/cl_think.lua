@@ -9,8 +9,8 @@ function GM:Think()
 			if ( dlight ) then
 				
 				dlight.Pos = v:GetPos();
-				dlight.r = 255;
-				dlight.g = 0;
+				dlight.r = 0;
+				dlight.g = 255;
 				dlight.b = 0;
 				dlight.Brightness = 8;
 				dlight.Size = 150;
@@ -35,7 +35,7 @@ function GM:Think()
 				dlight.r = 255;
 				dlight.g = 200;
 				dlight.b = 0;
-				dlight.Brightness = 8;
+				dlight.Brightness = 5;
 				dlight.Size = 200;
 				dlight.Decay = 200 * 5;
 				dlight.DieTime = CurTime() + 0.1;

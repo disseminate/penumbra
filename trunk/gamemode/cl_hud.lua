@@ -133,33 +133,41 @@ end
 
 function DrawWepData() -- This code SUCKS ( as in sucks )
 	
-	if( LocalPlayer():GetActiveWeapon() and LocalPlayer():Alive() ) then
+	if( LocalPlayer():Alive() ) then
 		
-		if( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_flashlight" ) then
-			
-			draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, LocalPlayer():GetNWInt( "flashlightpwr" ) / 100, Color( 0, 0, 0, 200 ), Color( 220, 220, 220, 255 ) );
-			draw.DrawText( math.Round( LocalPlayer():GetNWInt( "flashlightpwr" ) ) .. "%", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
-			
-		elseif( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_glowstick" ) then
-			
-			local mul = 1;
-			local LastGlow = LocalPlayer():GetNWInt( "LastGlowstick" );
-			
-			if( CurTime() - LastGlow <= 30 and CurTime() - LastGlow >= 0 ) then
+		if( LocalPlayer():GetActiveWeapon() ) then
+		
+			if( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_flashlight" ) then
 				
-				mul = ( 30 + -1 * ( CurTime() - LastGlow ) ) / 30;
+				draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, LocalPlayer():GetNWInt( "flashlightpwr" ) / 100, Color( 0, 0, 0, 200 ), Color( 220, 220, 220, 255 ) );
+				draw.DrawText( math.Round( LocalPlayer():GetNWInt( "flashlightpwr" ) ) .. "%", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
+				
+			elseif( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_glowstick" ) then
+				
+				local mul = 1;
+				local LastGlow = LocalPlayer():GetNWInt( "LastGlowstick" );
+				
+				if( CurTime() - LastGlow <= 30 and CurTime() - LastGlow >= 0 ) then
+					
+					mul = ( 30 + -1 * ( CurTime() - LastGlow ) ) / 30;
+					
+				end
+				
+				draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 0, 200, 0, 255 ) );
+				draw.DrawText( math.Round( mul * 30 ) .. "s", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
+				
+			elseif( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_laserpoint" ) then
+				
+				local mul = LocalPlayer():GetActiveWeapon().AmmoLeft / 10;
+				
+				draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 200, 0, 0, 255 ) );
+				draw.DrawText( mul * 10 .. "/10", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
+				
+				surface.SetDrawColor( 255, 255, 255, 255 );
+				surface.DrawLine( ScrW() / 2 - 5, ScrH() / 2, ScrW() / 2 + 5, ScrH() / 2 );
+				surface.DrawLine( ScrW() / 2, ScrH() / 2 - 5, ScrW() / 2, ScrH() / 2 + 5 );
 				
 			end
-			
-			draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 200, 0, 0, 255 ) );
-			draw.DrawText( math.Round( mul * 30 ) .. "s", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
-			
-		elseif( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_laserpoint" ) then
-			
-			local mul = LocalPlayer():GetActiveWeapon().AmmoLeft / 10;
-			
-			draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 0, 200, 255, 255 ) );
-			draw.DrawText( mul * 10 .. "/10", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
 			
 		end
 		
@@ -169,9 +177,14 @@ end
 
 function DrawPlayerInfo()
 	
-	local tr = LocalPlayer():GetEyeTrace();
+	local trace = { };
+	trace.start = LocalPlayer():EyePos();
+	trace.endpos = trace.start + LocalPlayer():GetAimVector() * 4096;
+	trace.filter = LocalPlayer();
 	
-	if( tr.Entity and tr.Entity:IsPlayer() ) then
+	local tr = util.TraceLine( trace );
+	
+	if( tr.Entity and tr.Entity:IsValid() and tr.Entity:IsPlayer() ) then
 		
 		local nick = tr.Entity:Nick();
 		local ills = tr.Entity:Money();
