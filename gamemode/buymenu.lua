@@ -34,7 +34,7 @@ function buyItem( ply, cmd, args )
 			
 		end
 		
-		if( ply:HasWeapon( wep ) ) then
+		if( ply:HasWeapon( wep ) or itemdata[7]( ply ) ) then
 			
 			ply:PrintMessage( 3, "You already have this!" );
 			return;
