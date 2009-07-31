@@ -137,11 +137,15 @@ function entity:IsShadow()
 end
 
 
-function player:ShadowKill()
+function player:ShadowKill( ent )
 	
 	self:SetMoney( self:Money() - 10 );
 	if( self:Money() < 0 ) then self:SetMoney( 0 ) end
-	self:PrintMessage( 3, "A shadow has touched you!" );
+	
+	local ppos = ent:GetPos() - self:GetPos();
+	local epos = Vector( ppos.x * -100, ppos.y * -100, 250 );
+	self:SetVelocity( epos );
+	
 	self:SaveData();
 	self:Kill();
 	

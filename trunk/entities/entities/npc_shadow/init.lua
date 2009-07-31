@@ -48,7 +48,7 @@ function ENT:Think()
 		
 		if( v:IsPlayer() and v:Alive() ) then
 			
-			v:ShadowKill();
+			v:ShadowKill( self );
 			
 		end
 		

@@ -10,11 +10,11 @@ function EFFECT:Init(data)
 		
 		if( particle ) then
 			
-			particle:SetColor( 100, 100, 100, 255 );
-			particle:SetGravity( Vector( 0, 0, -60 ) );
+			particle:SetColor( 50, 50, 50 );
+			particle:SetGravity( Vector( 0, 0, -300 ) );
 			particle:SetVelocity( Vector( math.random( -20, 20 ), math.random( -20, 20 ), math.random( 100, 300 ) ) );
 			particle:SetLifeTime( 0 );
-			particle:SetDieTime( 10 );
+			particle:SetDieTime( 4 );
 			particle:SetStartAlpha( 255 );
 			particle:SetEndAlpha( 255 );
 			particle:SetStartSize( 30 );

@@ -1,6 +1,6 @@
 "UnlitGeneric"
 {
-	"$basetexture" "sprites/glow06"
+	"$basetexture" "sprites/glow02"
 	"$vertexalpha" "1"
 	"$vertexcolor" "1"
 	"$translucent" "1"
