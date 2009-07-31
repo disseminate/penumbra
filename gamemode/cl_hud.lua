@@ -164,8 +164,8 @@ function DrawWepData() -- This code SUCKS ( as in sucks )
 				draw.DrawText( mul * 10 .. "/10", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
 				
 				surface.SetDrawColor( 255, 255, 255, 255 );
-				surface.DrawLine( ScrW() / 2 - 5, ScrH() / 2, ScrW() / 2 + 5, ScrH() / 2 );
-				surface.DrawLine( ScrW() / 2, ScrH() / 2 - 5, ScrW() / 2, ScrH() / 2 + 5 );
+				surface.DrawLine( ScrW() / 2 - 5, ScrH() / 2, ScrW() / 2 + 6, ScrH() / 2 );
+				surface.DrawLine( ScrW() / 2, ScrH() / 2 - 5, ScrW() / 2, ScrH() / 2 + 6 );
 				
 			end
 			
