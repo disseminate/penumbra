@@ -56,6 +56,7 @@ function GM:Initialize()
 					v:PrintMessage( 3, "Day! Press F3 to buy new weapons." );
 					
 					if( v.HasLaserPointer ) then
+						v:SetNWInt( "LaserAmmoLeft", 10 );
 						v:Give( "weapon_laserpoint" );
 					end
 					

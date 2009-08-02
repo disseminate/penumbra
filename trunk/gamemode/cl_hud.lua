@@ -158,7 +158,7 @@ function DrawWepData() -- This code SUCKS ( as in sucks )
 				
 			elseif( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_laserpoint" ) then
 				
-				local mul = LocalPlayer():GetActiveWeapon().AmmoLeft / 10;
+				local mul = LocalPlayer():GetNWInt( "LaserAmmoLeft" ) / 10;
 				
 				draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 200, 0, 0, 255 ) );
 				draw.DrawText( mul * 10 .. "/10", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );

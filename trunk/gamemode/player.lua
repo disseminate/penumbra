@@ -28,6 +28,25 @@ function GM:PlayerInitialSpawn( ply )
 	
 	ply:LoadData();
 	
+	timer.Simple( 1, function()
+		if( ply.HasLaserPointer ) then
+			ply:SetNWInt( "LaserAmmoLeft", 10 );
+			ply:Give( "weapon_laserpoint" );
+		end
+		
+		if( ply.HasGlowstick ) then
+			ply:Give( "weapon_glowstick" );
+		end
+		
+		if( ply.HasFlashbang ) then
+			ply:Give( "weapon_flashbang" );
+		end
+		
+		if( ply.HasMolotov ) then
+			ply:Give( "weapon_molotov" );
+		end
+	end );
+	
 end
 
 function GM:PlayerSpawn( ply )
