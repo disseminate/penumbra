@@ -35,7 +35,7 @@ function GM:Think()
 				dlight.r = 255;
 				dlight.g = 200;
 				dlight.b = 0;
-				dlight.Brightness = 5;
+				dlight.Brightness = math.random( 4000, 6000 ) / 1000; -- eg 5.512
 				dlight.Size = 200;
 				dlight.Decay = 200 * 5;
 				dlight.DieTime = CurTime() + 0.1;
