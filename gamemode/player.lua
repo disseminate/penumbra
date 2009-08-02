@@ -12,6 +12,10 @@ function GM:PlayerInitialSpawn( ply )
 	ply.HasFlashbang = false;
 	ply.HasMolotov = false;
 	
+	umsg.Start( "msgUpdateDay", ply );
+		umsg.Bool( DAY );
+	umsg.End();
+	
 	if( not ply:SaveExists() ) then
 		
 		ply:PrintMessage( 3, "Welcome to Penumbra for the first time, " .. ply:Nick() .. "." );
