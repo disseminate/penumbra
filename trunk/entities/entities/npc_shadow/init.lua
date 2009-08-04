@@ -4,6 +4,14 @@ AddCSLuaFile( "cl_init.lua" );
 AddCSLuaFile( "shared.lua" );
 include( "shared.lua" );
 
+IdleSounds = {
+	
+	"ambient/wind/wind_moan1.wav",
+	"ambient/wind/wind_moan2.wav",
+	"ambient/wind/wind_moan4.wav",
+	
+}
+
 function ENT:Initialize()
 
 	self:SetModel( "models/zombie/fast.mdl" );
@@ -42,6 +50,12 @@ function ENT:Think()
 		
 	end
 	
+	if( math.random( 1, 250 ) == 1 ) then
+		
+		local snd = Sound( IdleSounds[math.random( 1, #IdleSounds )] );
+		self:EmitSound( snd );
+		
+	end
 	
 	local ents = ents.FindInSphere( self:GetPos(), 16 ); -- Todo - optimize this
 	for k, v in pairs( ents ) do

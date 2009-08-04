@@ -135,39 +135,37 @@ function DrawWepData() -- This code SUCKS ( as in sucks )
 	
 	if( LocalPlayer():Alive() ) then
 		
-		if( LocalPlayer():GetActiveWeapon() ) then
+		local class = LocalPlayer():GetNWString( "CurWep" ); -- Hack.
 		
-			if( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_flashlight" ) then
+		if( class == "weapon_flashlight" ) then
+			
+			draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, LocalPlayer():GetNWInt( "flashlightpwr" ) / 100, Color( 0, 0, 0, 200 ), Color( 220, 220, 220, 255 ) );
+			draw.DrawText( math.Round( LocalPlayer():GetNWInt( "flashlightpwr" ) ) .. "%", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
+			
+		elseif( class == "weapon_glowstick" ) then
+			
+			local mul = 1;
+			local LastGlow = LocalPlayer():GetNWInt( "LastGlowstick" );
+			
+			if( CurTime() - LastGlow <= 30 and CurTime() - LastGlow >= 0 ) then
 				
-				draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, LocalPlayer():GetNWInt( "flashlightpwr" ) / 100, Color( 0, 0, 0, 200 ), Color( 220, 220, 220, 255 ) );
-				draw.DrawText( math.Round( LocalPlayer():GetNWInt( "flashlightpwr" ) ) .. "%", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
-				
-			elseif( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_glowstick" ) then
-				
-				local mul = 1;
-				local LastGlow = LocalPlayer():GetNWInt( "LastGlowstick" );
-				
-				if( CurTime() - LastGlow <= 30 and CurTime() - LastGlow >= 0 ) then
-					
-					mul = ( 30 + -1 * ( CurTime() - LastGlow ) ) / 30;
-					
-				end
-				
-				draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 0, 200, 0, 255 ) );
-				draw.DrawText( math.Round( mul * 30 ) .. "s", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
-				
-			elseif( LocalPlayer():GetActiveWeapon():GetClass() == "weapon_laserpoint" ) then
-				
-				local mul = LocalPlayer():GetNWInt( "LaserAmmoLeft" ) / 10;
-				
-				draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 200, 0, 0, 255 ) );
-				draw.DrawText( mul * 10 .. "/10", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
-				
-				surface.SetDrawColor( 255, 255, 255, 255 );
-				surface.DrawLine( ScrW() / 2 - 5, ScrH() / 2, ScrW() / 2 + 6, ScrH() / 2 );
-				surface.DrawLine( ScrW() / 2, ScrH() / 2 - 5, ScrW() / 2, ScrH() / 2 + 6 );
+				mul = ( 30 + -1 * ( CurTime() - LastGlow ) ) / 30;
 				
 			end
+			
+			draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 0, 200, 0, 255 ) );
+			draw.DrawText( math.Round( mul * 30 ) .. "s", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
+			
+		elseif( class == "weapon_laserpoint" ) then
+			
+			local mul = LocalPlayer():GetNWInt( "LaserAmmoLeft" ) / 10;
+			
+			draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 200, 0, 0, 255 ) );
+			draw.DrawText( mul * 10 .. "/10", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
+			
+			surface.SetDrawColor( 255, 255, 255, 255 );
+			surface.DrawLine( ScrW() / 2 - 5, ScrH() / 2, ScrW() / 2 + 6, ScrH() / 2 );
+			surface.DrawLine( ScrW() / 2, ScrH() / 2 - 5, ScrW() / 2, ScrH() / 2 + 6 );
 			
 		end
 		
@@ -235,11 +233,67 @@ function DrawHelp()
 		surface.SetTextPos( 275, ScrH() - 90 );
 		surface.DrawText( "Keep it full as much as possible." );
 		
-		surface.SetTextPos( ScrW() - 200, ScrH() - 30 );
-		surface.DrawText( "Penumbra by Disseminate." );
-		
 		--surface.SetTextPos( gui.MouseX() + 32, gui.MouseY() + 32 );
 		--surface.DrawText( gui.MouseX() .. ", " .. gui.MouseY() );
+	end
+	
+end
+
+function DrawScoreboard()
+	
+	if( SCOREBOARD ) then
+	
+		local ORIGINX = ScrW() / 2;
+		local ORIGINY = ScrH() / 2 - 200;
+		
+		local y = ( ORIGINY ) + ( math.cos( math.rad( 180 ) ) * math.sin( CurTime() ) * 10 );
+		draw.DrawText( "Penumbra", "PenumbraTextLarge", ScrW() / 2, y - 100, Color( 255, 255, 255, 255 ), 1 );
+		draw.DrawText( "By Disseminate", "PenumbraText", ScrW() / 2, y - 70, Color( 255, 255, 255, 255 ), 1 );
+		
+		surface.SetFont( "PenumbraText" );
+		surface.SetTextColor( 255, 255, 255, 255 );
+		
+		surface.SetDrawColor( 0, 0, 0, 100 );
+		surface.DrawRect( ORIGINX - 300, y - 40, 600, 30 );
+		
+		surface.SetTextPos( ORIGINX - 290, y - 35 );
+		surface.DrawText( "Name" );
+		
+		surface.SetTextPos( ORIGINX + 100, y - 35 );
+		surface.DrawText( "Ills" );
+		
+		surface.SetTextPos( ORIGINX + 160, y - 35 );
+		surface.DrawText( "Ping" );
+		
+		local off = 20;
+		local i = 0;
+		
+		for k, v in pairs( player.GetAll() ) do
+			
+			local basex = ORIGINX - 300;
+			local basey = y + off + ( i * 35 );
+			
+			if( i % 2 == 0 ) then
+				surface.SetDrawColor( 0, 0, 0, 100 );
+			else
+				surface.SetDrawColor( 0, 0, 0, 50 );
+			end
+			
+			surface.DrawRect( basex, basey, 600, 30 );
+			
+			surface.SetTextPos( basex + 10, basey + 5 );
+			surface.DrawText( v:Nick() );
+			
+			surface.SetTextPos( basex + 400, basey + 5 );
+			surface.DrawText( v:Money() );
+			
+			surface.SetTextPos( basex + 460, basey + 5 );
+			surface.DrawText( v:Ping() );
+			
+			i = i + 1;
+			
+		end
+		
 	end
 	
 end
@@ -252,5 +306,6 @@ function GM:HUDPaint()
 	DrawWepData();
 	DrawPlayerInfo();
 	DrawHelp();
+	DrawScoreboard();
 	
 end
