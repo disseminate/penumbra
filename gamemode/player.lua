@@ -6,6 +6,7 @@ function GM:PlayerInitialSpawn( ply )
 	ply:SetNWInt( "flashlightpwr", 100 );
 	ply:SetNWInt( "lastFlashUpdate", 0 );
 	ply:SetNWInt( "LastGlowstick", -30 );
+	ply:SetNWInt( "CurWep", "weapon_flashlight" );
 	
 	ply.HasLaserPointer = false;
 	ply.HasGlowstick = false;

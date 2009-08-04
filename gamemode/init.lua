@@ -4,6 +4,7 @@ AddCSLuaFile( "cl_binds.lua" );
 AddCSLuaFile( "cl_hud.lua" );
 AddCSLuaFile( "cl_think.lua" );
 AddCSLuaFile( "cl_buymenu.lua" );
+AddCSLuaFile( "cl_scoreboard.lua" )
 
 include( "shared.lua" );
 include( "meta.lua" );

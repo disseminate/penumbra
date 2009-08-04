@@ -35,6 +35,11 @@ function msgBuyMenu()
 	BuyPanel:Center();
 	BuyPanel:SetTitle( "Buy Menu" );
 	BuyPanel:MakePopup();
+	BuyPanel.Paint = function( self )
+		
+        draw.RoundedBox( 0, 0, 0, self:GetWide(), self:GetTall(), Color( 0, 0, 0, 50 ) );
+		
+	end
 	
 	BuyPanel.List = vgui.Create( "DPanelList", BuyPanel );
 	BuyPanel.List:SetPos( 25, 45 );
@@ -42,11 +47,17 @@ function msgBuyMenu()
 	BuyPanel.List:EnableHorizontal( false );
 	BuyPanel.List:EnableVerticalScrollbar( true );
 	BuyPanel.List:SetSpacing( 15 );
+	BuyPanel.List:SetDrawBackground( false );
 	
 	for k, v in pairs( BUY_ITEMS ) do
 		
 		BuyPanel.List[v[1]] = vgui.Create( "DPanel", BuyPanel.List );
 		BuyPanel.List[v[1]]:SetSize( 250, 64 );
+		BuyPanel.List[v[1]].Paint = function( self )
+			
+			draw.RoundedBox( 0, 0, 0, self:GetWide(), self:GetTall(), Color( 0, 0, 0, 100 ) );
+			
+		end
 		
 		BuyPanel.List[v[1]].Icon = vgui.Create( "SpawnIcon", BuyPanel.List[v[1]] );
 		BuyPanel.List[v[1]].Icon:SetPos( 0, 0 );

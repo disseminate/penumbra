@@ -44,5 +44,11 @@ end
 function SWEP:SecondaryAttack()
 end
 
+function SWEP:Deploy()
+	
+	self.Owner:SetNWString( "CurWep", "weapon_flashbang" );
+	
+end
+
 function SWEP:Reload()
 end

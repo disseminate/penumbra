@@ -66,5 +66,11 @@ end
 function SWEP:SecondaryAttack()
 end
 
+function SWEP:Deploy()
+	
+	self.Owner:SetNWString( "CurWep", "weapon_glowstick" );
+	
+end
+
 function SWEP:Reload()
 end

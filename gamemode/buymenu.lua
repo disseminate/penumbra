@@ -43,6 +43,11 @@ function buyItem( ply, cmd, args )
 		
 		ply:SetMoney( ply:Money() - amt );
 		ply:Give( wep );
+		if( wep == "weapon_laserpoint" ) then
+			
+			ply:SetNWInt( "LaserAmmoLeft", 10 );
+			
+		end
 		itemdata[6]( ply );
 		ply:SaveData();
 		ply:PrintMessage( 3, "You recieved a " .. name .. "." );

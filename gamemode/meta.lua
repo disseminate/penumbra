@@ -142,10 +142,6 @@ function player:ShadowKill( ent )
 	self:SetMoney( self:Money() - 10 );
 	if( self:Money() < 0 ) then self:SetMoney( 0 ) end
 	
-	local ppos = ent:GetPos() - self:GetPos();
-	local epos = Vector( ppos.x * -100, ppos.y * -100, 250 );
-	self:SetVelocity( epos );
-	
 	self:SaveData();
 	self:Kill();
 	
@@ -161,6 +157,7 @@ function entity:KillShadow( ply )
 	util.Effect( "shadowsmoke", effectdata );
 	
 	self:EmitSound( Sound( "npc/stalker/go_alert2.wav" ) );
+	self:EmitSound( Sound( "NPC_Antlion_Grub.Explode" ) );
 	self:Remove();
 	ply:SetMoney( ply:Money() + 1 );
 	ply:SaveData();
