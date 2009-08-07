@@ -139,8 +139,8 @@ function DrawWepData() -- This code SUCKS ( as in sucks )
 		
 		if( class == "weapon_flashlight" ) then
 			
-			draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, LocalPlayer():GetNWInt( "flashlightpwr" ) / 100, Color( 0, 0, 0, 200 ), Color( 220, 220, 220, 255 ) );
-			draw.DrawText( math.Round( LocalPlayer():GetNWInt( "flashlightpwr" ) ) .. "%", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
+			draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, LocalPlayer():GetNWInt( "flashlightpwr" ) / LocalPlayer():GetNWInt( "MaxFlashlight" ), Color( 0, 0, 0, 200 ), Color( 220, 220, 220, 255 ) );
+			draw.DrawText( math.Round( LocalPlayer():GetNWInt( "flashlightpwr" ) / LocalPlayer():GetNWInt( "MaxFlashlight" ) * 100 ) .. "%", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
 			
 		elseif( class == "weapon_glowstick" ) then
 			
