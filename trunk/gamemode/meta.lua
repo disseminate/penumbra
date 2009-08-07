@@ -151,7 +151,7 @@ end
 function entity:KillShadow( ply )
 	
 	local effectdata = EffectData();
-		effectdata:SetStart( self:GetPos() );
+		effectdata:SetStart( self:GetPos() + Vector( 0, 0, 50 ) );
 		effectdata:SetOrigin( self:GetPos() );
 		effectdata:SetScale( 1 );
 	util.Effect( "shadowsmoke", effectdata );
@@ -193,6 +193,7 @@ function player:LoadData()
 		self.HasGlowstick = tobool( ftab[3] );
 		self.HasFlashbang = tobool( ftab[4] );
 		self.HasMolotov = tobool( ftab[5] );
+		self:SetNWInt( "MaxFlashlight", tonumber( ftab[6] ) );
 		
 	end
 	
@@ -208,7 +209,8 @@ function player:SaveData()
 		tostring( self.HasLaserPointer ),
 		tostring( self.HasGlowstick ),
 		tostring( self.HasFlashbang ),
-		tostring( self.HasMolotov )
+		tostring( self.HasMolotov ),
+		tostring( self:GetNWInt( "MaxFlashlight" ) )
 	};
 	
 	file.Write( "penumbra/" .. sid .. ".txt", string.Implode( "$", str ) );

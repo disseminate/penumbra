@@ -42,7 +42,9 @@ function buyItem( ply, cmd, args )
 		end
 		
 		ply:SetMoney( ply:Money() - amt );
-		ply:Give( wep );
+		if( wep ~= "" ) then
+			ply:Give( wep );
+		end
 		if( wep == "weapon_laserpoint" ) then
 			
 			ply:SetNWInt( "LaserAmmoLeft", 10 );

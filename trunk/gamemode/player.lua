@@ -6,6 +6,7 @@ function GM:PlayerInitialSpawn( ply )
 	ply:SetNWInt( "flashlightpwr", 100 );
 	ply:SetNWInt( "lastFlashUpdate", 0 );
 	ply:SetNWInt( "LastGlowstick", -30 );
+	ply:SetNWInt( "MaxFlashlight", 100 );
 	ply:SetNWInt( "CurWep", "weapon_flashlight" );
 	
 	ply.HasLaserPointer = false;
@@ -28,6 +29,8 @@ function GM:PlayerInitialSpawn( ply )
 	end
 	
 	ply:LoadData();
+	
+	ply:SetNWInt( "flashlightpwr", ply:GetNWInt( "MaxFlashlight" ) );
 	
 	timer.Simple( 1, function()
 		if( ply.HasLaserPointer ) then
@@ -80,7 +83,7 @@ function GM:PlayerDeathSound() return true end
 function GM:DoPlayerDeath( ply, attacker, dmginfo )
 	
 	ply:SetNWInt( "IllumR", 0 );
-	ply:SetNWInt( "flashlightpwr", 100 );
+	ply:SetNWInt( "flashlightpwr", ply:GetNWInt( "MaxFlashlight" ) );
 	ply:SetNWInt( "lastFlashUpdate", 0 );
 	ply:SetNWInt( "LastGlowstick", -30 );
 	
