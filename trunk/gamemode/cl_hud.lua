@@ -1,4 +1,5 @@
 surface.CreateFont( "coolvetica", 40, 100, true, false, "PenumbraTextLarge" );
+surface.CreateFont( "coolvetica", 30, 100, true, false, "PenumbraTextMed" );
 surface.CreateFont( "coolvetica", 20, 100, true, false, "PenumbraText" );
 
 function GM:HUDShouldDraw( name )
@@ -129,6 +130,18 @@ function DrawTime()
 	surface.SetTextPos( ScrW() - x - 25, 210 );
 	surface.DrawText( t );
 	
+	surface.SetFont( "PenumbraTextMed" );
+	if( DAY ) then
+		t = string.sub( string.ToMinutesSeconds( -SEC + 60 ), 2 ); -- Remove the unnecessary and unused 0 at the beginning
+	else
+		t = string.sub( string.ToMinutesSeconds( -SEC + 300 ), 2 );
+	end
+	x, y = surface.GetTextSize( t );
+	
+	surface.DrawRect( ScrW() - x - 25, 270, x + 25, y + 10 );
+	surface.SetTextPos( ScrW() - x - 12, 275 );
+	surface.DrawText( t );
+	
 end
 
 function DrawWepData() -- This code SUCKS ( as in sucks )
@@ -163,10 +176,6 @@ function DrawWepData() -- This code SUCKS ( as in sucks )
 			draw.ProgressBar( 2, 0, ScrH() - 100, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 200, 0, 0, 255 ) );
 			draw.DrawText( mul * 10 .. "/10", "PenumbraText", 5, ScrH() - 95, Color( 0, 0, 0, 255 ), 0 );
 			
-			surface.SetDrawColor( 255, 255, 255, 255 );
-			surface.DrawLine( ScrW() / 2 - 5, ScrH() / 2, ScrW() / 2 + 6, ScrH() / 2 );
-			surface.DrawLine( ScrW() / 2, ScrH() / 2 - 5, ScrW() / 2, ScrH() / 2 + 6 );
-			
 		end
 		
 	end
@@ -197,7 +206,7 @@ end
 
 function DrawHelp()
 	
-	if( input.IsKeyDown( KEY_F1 ) ) then -- This is really inefficient, but will do for the time being
+	if( input.IsKeyDown( KEY_Q ) ) then -- This is really inefficient, but will do for the time being
 		
 		surface.SetFont( "PenumbraText" );
 		surface.SetTextColor( 255, 255, 255, 255 );
@@ -232,6 +241,9 @@ function DrawHelp()
 		surface.DrawText( "varies from weapon to weapon." );
 		surface.SetTextPos( 275, ScrH() - 90 );
 		surface.DrawText( "Keep it full as much as possible." );
+		
+		local mainText = "Penumbra is a NPC-killing gamemode, but instead of\nzombies or Breen, you have to kill unique NPCs called Shadows. They\nwill kill you if they touch you and can jump. Fortunately, you have\na flashlight to illuminate them with. Use it (and other\nassorted makeshift weapons) to kill them.";
+		draw.DrawText( mainText, "PenumbraText", ScrW() / 2, ScrH() / 2 - 50, Color( 255, 255, 255, 255 ), 1 );
 		
 		--surface.SetTextPos( gui.MouseX() + 32, gui.MouseY() + 32 );
 		--surface.DrawText( gui.MouseX() .. ", " .. gui.MouseY() );

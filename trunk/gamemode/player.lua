@@ -16,11 +16,13 @@ function GM:PlayerInitialSpawn( ply )
 	
 	umsg.Start( "msgUpdateDay", ply );
 		umsg.Bool( DAY );
+		umsg.Short( SEC );
 	umsg.End();
 	
 	if( not ply:SaveExists() ) then
 		
 		ply:PrintMessage( 3, "Welcome to Penumbra for the first time, " .. ply:Nick() .. "." );
+		ply:PrintMessage( 3, "Press Q for help." );
 		
 	else
 		
