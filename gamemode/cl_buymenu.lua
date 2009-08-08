@@ -76,11 +76,11 @@ function msgBuyMenu()
 		
 		BuyPanel.List[v[1]].Desc = vgui.Create( "DLabel", BuyPanel.List[v[1]] );
 		BuyPanel.List[v[1]].Desc:SetPos( 70, 20 );
-		BuyPanel.List[v[1]].Desc:SetText( ScaleLines( v[2], 250 ) );
+		BuyPanel.List[v[1]].Desc:SetText( ScaleLines( v[2], 240 ) );
 		BuyPanel.List[v[1]].Desc:SizeToContents();
 		
 		BuyPanel.List[v[1]].Cost = vgui.Create( "DLabel", BuyPanel.List[v[1]] );
-		BuyPanel.List[v[1]].Cost:SetPos( 220, 5 );
+		BuyPanel.List[v[1]].Cost:SetPos( 200, 5 );
 		BuyPanel.List[v[1]].Cost:SetText( v[3] .. " ills" );
 		BuyPanel.List[v[1]].Cost:SizeToContents();
 		

@@ -16,7 +16,7 @@ if( CLIENT ) then
 	SWEP.ViewModelFlip		= false	
 	SWEP.CSMuzzleFlashes	= true
 	
-	SWEP.DrawCrosshair = false;
+	SWEP.DrawCrosshair = true;
 
 end
 

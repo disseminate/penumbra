@@ -42,6 +42,7 @@ function GM:Initialize()
 				
 					umsg.Start( "msgUpdateDay", v );
 						umsg.Bool( DAY );
+						umsg.Short( SEC );
 					umsg.End();
 					
 				end

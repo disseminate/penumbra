@@ -6,12 +6,21 @@ include( "cl_buymenu.lua" );
 include( "cl_scoreboard.lua" );
 
 DAY = false;
+SEC = 0;
 DAY_LASTTRANS = 0;
 
 function msgUpdateDay( um )
 	
 	DAY = um:ReadBool();
+	SEC = um:ReadShort();
 	DAY_LASTTRANS = CurTime();
 	
 end
 usermessage.Hook( "msgUpdateDay", msgUpdateDay );
+
+function clUpdateSec()
+	
+	SEC = math.Clamp( SEC + 1, 0, 300 );
+	
+end
+timer.Create( "clUpdateSec", 1, 0, clUpdateSec );
