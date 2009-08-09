@@ -1,6 +1,6 @@
 surface.CreateFont( "coolvetica", 12, 400, true, false, "BasicTestFont" );
 
-function ScaleLines( text, width )
+function ScaleLines( text, width ) -- Pretty buggy but works
 	
 	local modtext = text;
 	surface.SetFont( "BasicTestFont" );
@@ -76,12 +76,12 @@ function msgBuyMenu()
 		
 		BuyPanel.List[v[1]].Desc = vgui.Create( "DLabel", BuyPanel.List[v[1]] );
 		BuyPanel.List[v[1]].Desc:SetPos( 70, 20 );
-		BuyPanel.List[v[1]].Desc:SetText( ScaleLines( v[2], 240 ) );
+		BuyPanel.List[v[1]].Desc:SetText( ScaleLines( v[2], 230 ) );
 		BuyPanel.List[v[1]].Desc:SizeToContents();
 		
 		BuyPanel.List[v[1]].Cost = vgui.Create( "DLabel", BuyPanel.List[v[1]] );
-		BuyPanel.List[v[1]].Cost:SetPos( 200, 5 );
-		BuyPanel.List[v[1]].Cost:SetText( v[3] .. " ills" );
+		BuyPanel.List[v[1]].Cost:SetPos( 210, 5 );
+		BuyPanel.List[v[1]].Cost:SetText( "$" .. v[3] );
 		BuyPanel.List[v[1]].Cost:SizeToContents();
 		
 		BuyPanel.List:AddItem( BuyPanel.List[v[1]] );
