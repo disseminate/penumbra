@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "IGWeapons\igresarms"
+	"$bumpmap" "IGWeapons\igresarms_norm"
+}

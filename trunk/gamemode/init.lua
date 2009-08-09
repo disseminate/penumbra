@@ -13,6 +13,27 @@ include( "player.lua" );
 include( "buymenu.lua" );
 
 resource.AddFile( "materials/sprites/shadow.vmt" );
+resource.AddFile( "materials/IGWeapons/Gloves.vmt" );
+resource.AddFile( "materials/IGWeapons/Gloves.vtf" );
+resource.AddFile( "materials/IGWeapons/igraharms.vmt" );
+resource.AddFile( "materials/IGWeapons/igraharms.vtf" );
+resource.AddFile( "materials/IGWeapons/igresarms.vmt" );
+resource.AddFile( "materials/IGWeapons/igresarms.vtf" );
+resource.AddFile( "materials/IGWeapons/igresarms_norm.vmt" );
+resource.AddFile( "materials/IGWeapons/igresarms_norm.vtf" );
+resource.AddFile( "materials/IGWeapons/RaArms.vmt" );
+resource.AddFile( "materials/IGWeapons/RaArms.vtf" );
+resource.AddFile( "materials/IGWeapons/vodka_bottle.vmt" );
+resource.AddFile( "materials/IGWeapons/vodka_bottle.vtf" );
+resource.AddFile( "materials/IGWeapons/vodka_bottle_gib.vmt" );
+resource.AddFile( "materials/IGWeapons/vodka_bottle_gib.vtf" );
+
+resource.AddFile( "models/weapons/v_molotov.mdl" );
+resource.AddFile( "models/weapons/v_molotov.dx80.vtx" );
+resource.AddFile( "models/weapons/v_molotov.dx90.vtx" );
+resource.AddFile( "models/weapons/v_molotov.sw.vtx" );
+resource.AddFile( "models/weapons/v_molotov.xbox.vtx" );
+resource.AddFile( "models/weapons/v_molotov.vvd" );
 
 MAP = { }
 include( "spawnpoints/" .. string.lower( game.GetMap() ) .. ".lua" );

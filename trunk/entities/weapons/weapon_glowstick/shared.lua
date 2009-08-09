@@ -68,6 +68,7 @@ end
 
 function SWEP:Deploy()
 	
+	self.Weapon:SendWeaponAnim( ACT_VM_DRAW );
 	self.Owner:SetNWString( "CurWep", "weapon_glowstick" );
 	
 end
