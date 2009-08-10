@@ -12,7 +12,7 @@ function GM:HUDShouldDraw( name )
 		"CHudBattery",
 	 }
 	
-	for k, v in pairs( nodraw ) do
+	for _, v in pairs( nodraw ) do
 	
 		if( name == v ) then return false; end
 	
@@ -182,53 +182,6 @@ function DrawPlayerInfo()
 	
 end
 
-function DrawHelp()
-	
-	if( input.IsKeyDown( KEY_Q ) ) then -- This is really inefficient, but will do for the time being
-		
-		surface.SetFont( "PenumbraText" );
-		surface.SetTextColor( 255, 255, 255, 255 );
-		surface.SetDrawColor( 255, 255, 255, 255 );
-		
-		surface.DrawLine( 109, 260, 164, 273 );
-		
-		surface.SetTextPos( 164, 273 );
-		surface.DrawText( "This is your ill, or illumination count." );
-		surface.SetTextPos( 164, 293 );
-		surface.DrawText( "It serves as a point counter or currency" );
-		surface.SetTextPos( 164, 313 );
-		surface.DrawText( "in Penumbra." );
-		
-		surface.DrawLine( ScrW() - 85, 260, ScrW() - 185, 273 );
-		
-		surface.SetTextPos( ScrW() - 450, 273 );
-		surface.DrawText( "This shows the time of day. If night," );
-		surface.SetTextPos( ScrW() - 450, 293 );
-		surface.DrawText( "shadows will attempt to kill you. Avoid" );
-		surface.SetTextPos( ScrW() - 450, 313 );
-		surface.DrawText( "contact. If day, all shadows die and you" );
-		surface.SetTextPos( ScrW() - 450, 333 );
-		surface.DrawText( "can buy new weapons with F3." );
-		
-		surface.DrawLine( 200, ScrH() - 100, 275, ScrH() - 150 );
-		surface.SetTextPos( 275, ScrH() - 150 );
-		surface.DrawText( "This is the ammo counter. It (durr)" );
-		surface.SetTextPos( 275, ScrH() - 130 );
-		surface.DrawText( "shows how much ammo you have. It" );
-		surface.SetTextPos( 275, ScrH() - 110 );
-		surface.DrawText( "varies from weapon to weapon." );
-		surface.SetTextPos( 275, ScrH() - 90 );
-		surface.DrawText( "Keep it full as much as possible." );
-		
-		local mainText = "Penumbra is a NPC-killing gamemode, but instead of\nzombies or Breen, you have to kill unique NPCs called Shadows. They\nwill kill you if they touch you and can jump. Fortunately, you have\na flashlight to illuminate them with. Use it (and other\nassorted makeshift weapons) to kill them.";
-		draw.DrawText( mainText, "PenumbraText", ScrW() / 2, ScrH() / 2 - 50, Color( 255, 255, 255, 255 ), 1 );
-		
-		--surface.SetTextPos( gui.MouseX() + 32, gui.MouseY() + 32 );
-		--surface.DrawText( gui.MouseX() .. ", " .. gui.MouseY() );
-	end
-	
-end
-
 function DrawScoreboard()
 	
 	if( SCOREBOARD ) then
@@ -258,7 +211,7 @@ function DrawScoreboard()
 		local off = 20;
 		local i = 0;
 		
-		for k, v in pairs( player.GetAll() ) do
+		for _, v in pairs( player.GetAll() ) do
 			
 			local basex = ORIGINX - 300;
 			local basey = y + off + ( i * 35 );
@@ -295,7 +248,6 @@ function GM:HUDPaint()
 	DrawTime();
 	DrawWepData();
 	DrawPlayerInfo();
-	DrawHelp();
 	DrawScoreboard();
 	
 end

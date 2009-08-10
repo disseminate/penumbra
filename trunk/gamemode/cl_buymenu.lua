@@ -49,7 +49,7 @@ function msgBuyMenu()
 	BuyPanel.List:SetSpacing( 15 );
 	BuyPanel.List:SetDrawBackground( false );
 	
-	for k, v in pairs( BUY_ITEMS ) do
+	for _, v in pairs( BUY_ITEMS ) do
 		
 		BuyPanel.List[v[1]] = vgui.Create( "DPanel", BuyPanel.List );
 		BuyPanel.List[v[1]]:SetSize( 250, 64 );

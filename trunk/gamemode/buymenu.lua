@@ -11,7 +11,7 @@ function buyItem( ply, cmd, args )
 	
 	local itemdata = { };
 	
-	for k, v in pairs( BUY_ITEMS ) do
+	for _, v in pairs( BUY_ITEMS ) do
 		
 		if( v[1] == name ) then
 			

@@ -4,6 +4,7 @@ include( "cl_hud.lua" );
 include( "cl_think.lua" );
 include( "cl_buymenu.lua" );
 include( "cl_scoreboard.lua" );
+include( "cl_help.lua" );
 
 DAY = false;
 SEC = 0;

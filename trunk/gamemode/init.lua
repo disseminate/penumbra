@@ -5,6 +5,7 @@ AddCSLuaFile( "cl_hud.lua" );
 AddCSLuaFile( "cl_think.lua" );
 AddCSLuaFile( "cl_buymenu.lua" );
 AddCSLuaFile( "cl_scoreboard.lua" )
+AddCSLuaFile( "cl_help.lua" );
 
 include( "shared.lua" );
 include( "meta.lua" );
@@ -51,7 +52,7 @@ function GM:Initialize()
 			
 			if( SEC >= 60 ) then -- 1 min
 				
-				for k, v in pairs( player.GetAll() ) do
+				for _, v in pairs( player.GetAll() ) do
 					
 					v:PrintMessage( 3, "Night!" );
 					
@@ -59,7 +60,7 @@ function GM:Initialize()
 				DAY = false;
 				SEC = 0;
 				
-				for k, v in pairs( player.GetAll() ) do
+				for _, v in pairs( player.GetAll() ) do
 				
 					umsg.Start( "msgUpdateDay", v );
 						umsg.Bool( DAY );
@@ -74,7 +75,7 @@ function GM:Initialize()
 			
 			if( SEC >= 300 ) then -- 5 mins
 				
-				for k, v in pairs( player.GetAll() ) do
+				for _, v in pairs( player.GetAll() ) do
 					
 					v:PrintMessage( 3, "Day! Press F3 to buy new weapons." );
 					
@@ -99,7 +100,7 @@ function GM:Initialize()
 				DAY = true;
 				SEC = 0;
 				
-				for k, v in pairs( ents.GetAll() ) do
+				for _, v in pairs( ents.GetAll() ) do
 					
 					if( v:IsShadow() ) then
 						
@@ -110,7 +111,7 @@ function GM:Initialize()
 					
 				end
 				
-				for k, v in pairs( player.GetAll() ) do
+				for _, v in pairs( player.GetAll() ) do
 				
 					umsg.Start( "msgUpdateDay", v );
 						umsg.Bool( DAY );
@@ -129,7 +130,7 @@ function GM:Initialize()
 		if( not DAY ) then
 			
 			local num = 0;
-			for k, v in pairs( ents.GetAll() ) do
+			for _, v in pairs( ents.GetAll() ) do
 				
 				if( v:IsShadow() ) then
 					

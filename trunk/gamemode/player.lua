@@ -80,6 +80,13 @@ function GM:ShowSpare1( ply )
 	
 end
 
+function GM:ShowHelp( ply )
+	
+	umsg.Start( "PenHelp", ply );
+	umsg.End();
+	
+end
+
 function GM:PlayerDeathSound() return true end
 
 function GM:DoPlayerDeath( ply, attacker, dmginfo )
