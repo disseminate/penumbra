@@ -29,7 +29,7 @@ end
 
 function ENT:Think()
 	
-	for k, v in pairs( player.GetAll() ) do
+	for _, v in pairs( player.GetAll() ) do
 		
 		self:AddEntityRelationship( v, 1, 10 );
 		
@@ -58,7 +58,7 @@ function ENT:Think()
 	end
 	
 	local ents = ents.FindInSphere( self:GetPos(), 16 ); -- Todo - optimize this
-	for k, v in pairs( ents ) do
+	for _, v in pairs( ents ) do
 		
 		if( v:IsPlayer() and v:Alive() ) then
 			
@@ -104,7 +104,7 @@ function ENT:FindClosestPly( enttab )
 	local len = 999999; -- max length - for sorting
 	local pl = nil;
 	
-	for k, v in pairs( tab ) do
+	for _, v in pairs( tab ) do
 		
 		local my = self:GetPos();
 		local their = v:GetPos()

@@ -58,7 +58,7 @@ function GM:Think()
 		
 	end
 	
-	for k, v in pairs( IllumPositions ) do
+	for _, v in pairs( IllumPositions ) do
 		
 		local ents = ents.FindInSphere( v[2], v[3] );
 		
