@@ -50,7 +50,7 @@ function GM:Initialize()
 		SEC = SEC + 1;
 		if( DAY ) then
 			
-			if( SEC >= 60 ) then -- 1 min
+			if( SEC >= DAY_LEN ) then -- 1 min
 				
 				for _, v in pairs( player.GetAll() ) do
 					
@@ -73,7 +73,7 @@ function GM:Initialize()
 			
 		else
 			
-			if( SEC >= 300 ) then -- 5 mins
+			if( SEC >= NIGHT_LEN ) then
 				
 				for _, v in pairs( player.GetAll() ) do
 					

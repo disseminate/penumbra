@@ -139,11 +139,15 @@ end
 
 function player:ShadowKill( ent )
 	
-	self:SetMoney( self:Money() - 10 );
-	if( self:Money() < 0 ) then self:SetMoney( 0 ) end
-	
-	self:SaveData();
-	self:Kill();
+	if( CurTime() - self.LastSpawn > 5 ) then -- Spawn protection
+		
+		self:SetMoney( self:Money() - 10 );
+		if( self:Money() < 0 ) then self:SetMoney( 0 ) end
+		
+		self:SaveData();
+		self:Kill();
+		
+	end
 	
 end
 

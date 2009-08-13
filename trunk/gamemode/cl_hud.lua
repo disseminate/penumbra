@@ -101,13 +101,13 @@ function DrawTime()
 	
 	if( DAY ) then
 		
-		draw.ProgressBar( 2, ScrW() - 205, ScrH() - 35, 200, 30, -( SEC / 60 ) + 1, Color( 0, 0, 0, 200 ), Color( 255, 255, 190, 255 ) );
-		draw.DrawText( string.sub( string.ToMinutesSeconds( -SEC + 60 ), 2 ), "PenumbraText", ScrW() - 200, ScrH() - 30, Color( 0, 0, 0, 255 ), 0 );
+		draw.ProgressBar( 2, ScrW() - 205, ScrH() - 35, 200, 30, -( SEC / DAY_LEN ) + 1, Color( 0, 0, 0, 200 ), Color( 255, 255, 190, 255 ) );
+		draw.DrawText( string.sub( string.ToMinutesSeconds( -SEC + DAY_LEN ), 2 ), "PenumbraText", ScrW() - 200, ScrH() - 30, Color( 0, 0, 0, 255 ), 0 );
 		
 	else
 		
-		draw.ProgressBar( 2, ScrW() - 205, ScrH() - 35, 200, 30, SEC / 300, Color( 0, 0, 0, 200 ), Color( 255, 255, 190, 255 ) );
-		draw.DrawText( string.sub( string.ToMinutesSeconds( -SEC + 300 ), 2 ), "PenumbraText", ScrW() - 200, ScrH() - 30, Color( 0, 0, 0, 255 ), 0 );
+		draw.ProgressBar( 2, ScrW() - 205, ScrH() - 35, 200, 30, SEC / NIGHT_LEN, Color( 0, 0, 0, 200 ), Color( 255, 255, 190, 255 ) );
+		draw.DrawText( string.sub( string.ToMinutesSeconds( -SEC + NIGHT_LEN ), 2 ), "PenumbraText", ScrW() - 200, ScrH() - 30, Color( 0, 0, 0, 255 ), 0 );
 		
 	end
 	

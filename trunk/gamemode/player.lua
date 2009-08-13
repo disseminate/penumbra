@@ -19,10 +19,12 @@ function GM:PlayerInitialSpawn( ply )
 		umsg.Short( SEC );
 	umsg.End();
 	
+	ply.LastSpawn = CurTime();
+	
 	if( not ply:SaveExists() ) then
 		
 		ply:PrintMessage( 3, "Welcome to Penumbra for the first time, " .. ply:Nick() .. "." );
-		ply:PrintMessage( 3, "Press Q for help." );
+		ply:PrintMessage( 3, "Press F1 for help." );
 		
 	else
 		
@@ -60,6 +62,7 @@ function GM:PlayerSpawn( ply )
 	ply:UnSpectate()
 	hook.Call( "PlayerLoadout", GAMEMODE, ply );
 	hook.Call( "PlayerSetModel", GAMEMODE, ply );
+	ply.LastSpawn = CurTime();
 	
 end
 

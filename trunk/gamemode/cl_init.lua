@@ -21,7 +21,7 @@ usermessage.Hook( "msgUpdateDay", msgUpdateDay );
 
 function clUpdateSec()
 	
-	SEC = math.Clamp( SEC + 1, 0, 300 );
+	SEC = math.Clamp( SEC + 1, 0, NIGHT_LEN );
 	
 end
 timer.Create( "clUpdateSec", 1, 0, clUpdateSec );
