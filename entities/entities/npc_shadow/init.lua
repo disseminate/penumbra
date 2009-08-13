@@ -57,7 +57,7 @@ function ENT:Think()
 		
 	end
 	
-	local ents = ents.FindInSphere( self:GetPos(), 16 ); -- Todo - optimize this
+	local ents = ents.FindInSphere( self:GetPos(), 32 ); -- Todo - optimize this
 	for _, v in pairs( ents ) do
 		
 		if( v:IsPlayer() and v:Alive() ) then

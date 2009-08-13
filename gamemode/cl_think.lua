@@ -1,3 +1,10 @@
+FIRE_BRIGHTNESS = 0.00;
+timer.Create( "FireRandomizer", 0.04, 0, function()
+	
+	FIRE_BRIGHTNESS = math.random( 4000, 6000 ) / 1000;
+	
+end );
+
 function GM:Think()
 	
 	for _, v in pairs( player.GetAll() ) do
@@ -35,7 +42,7 @@ function GM:Think()
 				dlight.r = 255;
 				dlight.g = 200;
 				dlight.b = 0;
-				dlight.Brightness = math.random( 4000, 6000 ) / 1000; -- eg 5.512
+				dlight.Brightness = FIRE_BRIGHTNESS; -- eg 5.512
 				dlight.Size = 200;
 				dlight.Decay = 200 * 5;
 				dlight.DieTime = CurTime() + 0.1;

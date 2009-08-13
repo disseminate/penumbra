@@ -17,3 +17,6 @@ BUY_ITEMS = {
 	{ "Molotov Cocktail", "Think of it as a stationary turret, but cooler and with fire.", 275, "weapon_molotov", "models/props_junk/garbage_glassbottle003a.mdl", function( ply ) ply.HasMolotov = true end, function( ply ) return ply.HasMolotov end },
 	{ "Flashlight Upgrade #2", "Get 300% of the regular flashlight power.", 350, "", "models/props_lab/tpplug.mdl", function( ply ) ply:SetNWInt( "MaxFlashlight", 300 ) ply:SetNWInt( "flashlightpwr", 300 ) end, function( ply ) return ( ply:GetNWInt( "MaxFlashlight" ) == 300 ) end }
 }
+
+NIGHT_LEN = 180;
+DAY_LEN = 60;
