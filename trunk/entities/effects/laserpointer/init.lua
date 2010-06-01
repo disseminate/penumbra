@@ -1,4 +1,4 @@
-EFFECT.Mat = Material( "cable/redlaser" )
+EFFECT.Mat = Material( "penumbra/uvlaser" )
 
 
 function EFFECT:Init( data )
