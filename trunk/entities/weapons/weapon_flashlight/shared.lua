@@ -1,10 +1,11 @@
 if( SERVER ) then
 	
 	AddCSLuaFile( "shared.lua" );
-	SWEP.HoldType = "melee";
 	SWEP.FOVAmt = 20;
 	
 end
+
+SWEP.HoldType = "fist";
 
 SWEP.PrintName = "Flashlight";
 
@@ -23,6 +24,11 @@ end
 SWEP.WorldModel = "";
 SWEP.ViewModel = "";
 
+function SWEP:Initialize()
+	
+	self:SetWeaponHoldType( self.HoldType );
+	
+end
 
 function SWEP:PrimaryAttack()
 end

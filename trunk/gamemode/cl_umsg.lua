@@ -18,6 +18,14 @@ function msgLaserAmmoLeft( um )
 end
 usermessage.Hook( "msgLaserAmmoLeft", msgLaserAmmoLeft );
 
+function msgUVAmmoLeft( um )
+	
+	local t = um:ReadShort();
+	LocalPlayer().UVAmmoLeft = t;
+	
+end
+usermessage.Hook( "msgUVAmmoLeft", msgUVAmmoLeft );
+
 function msgMaxFlashlight( um )
 	
 	local t = um:ReadShort();

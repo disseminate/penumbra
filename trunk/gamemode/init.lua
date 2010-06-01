@@ -14,28 +14,19 @@ include( "think.lua" );
 include( "player.lua" );
 include( "buymenu.lua" );
 
-resource.AddFile( "materials/sprites/shadow.vmt" );
-resource.AddFile( "materials/IGWeapons/Gloves.vmt" );
-resource.AddFile( "materials/IGWeapons/Gloves.vtf" );
-resource.AddFile( "materials/IGWeapons/igraharms.vmt" );
-resource.AddFile( "materials/IGWeapons/igraharms.vtf" );
-resource.AddFile( "materials/IGWeapons/igresarms.vmt" );
-resource.AddFile( "materials/IGWeapons/igresarms.vtf" );
-resource.AddFile( "materials/IGWeapons/igresarms_norm.vmt" );
-resource.AddFile( "materials/IGWeapons/igresarms_norm.vtf" );
-resource.AddFile( "materials/IGWeapons/RaArms.vmt" );
-resource.AddFile( "materials/IGWeapons/RaArms.vtf" );
-resource.AddFile( "materials/IGWeapons/vodka_bottle.vmt" );
-resource.AddFile( "materials/IGWeapons/vodka_bottle.vtf" );
-resource.AddFile( "materials/IGWeapons/vodka_bottle_gib.vmt" );
-resource.AddFile( "materials/IGWeapons/vodka_bottle_gib.vtf" );
+resource.AddFile( "materials/penumbra/shadow.vmt" );
+resource.AddFile( "materials/penumbra/uvlaser.vmt" );
 
+resource.AddFile( "materials/IGWeapons/Gloves.vmt" );
+resource.AddFile( "materials/IGWeapons/igraharms.vmt" );
+resource.AddFile( "materials/IGWeapons/igresarms.vmt" );
+resource.AddFile( "materials/IGWeapons/igresarms_norm.vmt" );
+resource.AddFile( "materials/IGWeapons/RaArms.vmt" );
+resource.AddFile( "materials/IGWeapons/vodka_bottle.vmt" );
+resource.AddFile( "materials/IGWeapons/vodka_bottle_gib.vmt" );
 resource.AddFile( "models/weapons/v_molotov.mdl" );
-resource.AddFile( "models/weapons/v_molotov.dx80.vtx" );
-resource.AddFile( "models/weapons/v_molotov.dx90.vtx" );
-resource.AddFile( "models/weapons/v_molotov.sw.vtx" );
-resource.AddFile( "models/weapons/v_molotov.xbox.vtx" );
-resource.AddFile( "models/weapons/v_molotov.vvd" );
+
+resource.AddFile( "maps/" .. game.GetMap() .. ".bsp" );
 
 MAP = { }
 include( "spawnpoints/" .. string.lower( game.GetMap() ) .. ".lua" );
@@ -91,6 +82,17 @@ function GM:Initialize()
 						
 					end
 					
+					if( v.HasUVLauncher ) then
+						
+						v.UVAmmoLeft = 80;
+						umsg.Start( "msgUVAmmoLeft", v );
+							umsg.Short( 80 );
+						umsg.End();
+						
+						v:Give( "weapon_uvlauncher" );
+						
+					end
+					
 					if( v.HasGlowstick ) then
 						v:Give( "weapon_glowstick" );
 					end
@@ -101,6 +103,10 @@ function GM:Initialize()
 					
 					if( v.HasMolotov ) then
 						v:Give( "weapon_molotov" );
+					end
+					
+					if( v.HasFlare ) then
+						v:Give( "weapon_flaregun" );
 					end
 					
 				end

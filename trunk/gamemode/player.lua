@@ -14,9 +14,11 @@ function GM:PlayerInitialSpawn( ply )
 	umsg.End();
 	
 	ply.HasLaserPointer = false;
+	ply.HasUVLauncher = false;
 	ply.HasGlowstick = false;
 	ply.HasFlashbang = false;
 	ply.HasMolotov = false;
+	ply.HasFlare = false;
 	
 	umsg.Start( "msgUpdateDay", ply );
 		umsg.Bool( DAY );
@@ -52,6 +54,14 @@ function GM:PlayerInitialSpawn( ply )
 			ply:Give( "weapon_laserpoint" );
 		end
 		
+		if( ply.HasUVLauncher ) then
+			ply.UVAmmoLeft = 80;
+			umsg.Start( "msgUVAmmoLeft", ply );
+				umsg.Short( 80 );
+			umsg.End();
+			ply:Give( "weapon_uvlauncher" );
+		end
+		
 		if( ply.HasGlowstick ) then
 			ply:Give( "weapon_glowstick" );
 		end
@@ -62,6 +72,10 @@ function GM:PlayerInitialSpawn( ply )
 		
 		if( ply.HasMolotov ) then
 			ply:Give( "weapon_molotov" );
+		end
+		
+		if( ply.HasFlare ) then
+			ply:Give( "weapon_flare" );
 		end
 	end );
 	
