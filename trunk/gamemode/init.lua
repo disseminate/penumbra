@@ -28,8 +28,13 @@ resource.AddFile( "models/weapons/v_molotov.mdl" );
 
 resource.AddFile( "maps/" .. game.GetMap() .. ".bsp" );
 
-MAP = { }
-include( "spawnpoints/" .. string.lower( game.GetMap() ) .. ".lua" );
+MAP = { };
+MAP.ShadowSpawns = { };
+local SpawnpointFile = file.FindInLua( "Penumbra/gamemode/spawnpoints/*.lua" );
+
+for k, v in pairs( SpawnpointFile ) do
+	include( "spawnpoints/" .. v );
+end
 
 
 DAY = false
