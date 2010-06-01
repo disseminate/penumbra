@@ -6,6 +6,7 @@ AddCSLuaFile( "cl_think.lua" );
 AddCSLuaFile( "cl_buymenu.lua" );
 AddCSLuaFile( "cl_scoreboard.lua" )
 AddCSLuaFile( "cl_help.lua" );
+AddCSLuaFile( "cl_umsg.lua" );
 
 include( "shared.lua" );
 include( "meta.lua" );
@@ -80,8 +81,14 @@ function GM:Initialize()
 					v:PrintMessage( 3, "Day! Press F3 to buy new weapons." );
 					
 					if( v.HasLaserPointer ) then
-						v:SetNWInt( "LaserAmmoLeft", 10 );
+						
+						v.LaserAmmoLeft = 10;
+						umsg.Start( "msgLaserAmmoLeft", v );
+							umsg.Short( 10 );
+						umsg.End();
+						
 						v:Give( "weapon_laserpoint" );
+						
 					end
 					
 					if( v.HasGlowstick ) then

@@ -5,6 +5,7 @@ include( "cl_think.lua" );
 include( "cl_buymenu.lua" );
 include( "cl_scoreboard.lua" );
 include( "cl_help.lua" );
+include( "cl_umsg.lua" );
 
 DAY = false;
 SEC = 0;

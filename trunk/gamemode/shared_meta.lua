@@ -19,7 +19,7 @@ function meta:CanUseFlashlight()
 	
 	if( self:Alive() ) then
 	
-		if( self:GetNWString( "CurWep" ) == "weapon_flashlight" and self:GetNWInt( "flashlightpwr" ) > 0 ) then
+		if( self:GetActiveWeapon():GetClass() == "weapon_flashlight" and ( ( CLIENT and FlashlightPwr > 0 ) or ( SERVER and self.FlashlightPwr > 0 ) ) ) then
 			
 			return true;
 			

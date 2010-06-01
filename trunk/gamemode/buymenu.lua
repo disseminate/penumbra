@@ -47,7 +47,11 @@ function buyItem( ply, cmd, args )
 		end
 		if( wep == "weapon_laserpoint" ) then
 			
-			ply:SetNWInt( "LaserAmmoLeft", 10 );
+			umsg.Start( "msgLaserAmmoLeft", ply );
+				umsg.Short( 10 );
+			umsg.End();
+			
+			ply.LaserAmmoLeft = 10;
 			
 		end
 		itemdata[6]( ply );

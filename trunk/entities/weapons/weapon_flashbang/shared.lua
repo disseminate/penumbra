@@ -27,15 +27,22 @@ function SWEP:PrimaryAttack()
 	
 	if( SERVER ) then
 		
-		local gren = ents.Create( "ent_flash" );
-			gren:SetPos( self.Owner:EyePos() + self.Owner:GetAimVector() * 50 );
-			gren:Spawn();
-			gren.Owner = self.Owner;
+		self:SendWeaponAnim( ACT_VM_THROW );
+		
+		timer.Simple( 0.3, function()
 			
-			local phys = gren:GetPhysicsObject();
-			phys:ApplyForceCenter( self.Owner:GetAimVector() * 700 );
-			
-			self.Owner:StripWeapon( "weapon_flashbang" );
+			local gren = ents.Create( "ent_flash" );
+				gren:SetPos( self.Owner:EyePos() + self.Owner:GetAimVector() * 50 );
+				gren:Spawn();
+				gren.Owner = self.Owner;
+				
+				local phys = gren:GetPhysicsObject();
+				phys:ApplyForceCenter( self.Owner:GetAimVector() * 700 );
+				phys:AddAngleVelocity( Angle( math.random( -180, 180 ), math.random( -180, 180 ), math.random( -180, 180 ) ) );
+				
+				self.Owner:StripWeapon( "weapon_flashbang" );
+				
+		end );
 		
 	end
 	
@@ -46,8 +53,10 @@ end
 
 function SWEP:Deploy()
 	
-	self.Weapon:SendWeaponAnim( ACT_VM_DRAW );
-	self.Owner:SetNWString( "CurWep", "weapon_flashbang" );
+	self:SendWeaponAnim( ACT_VM_DRAW );
+	umsg.Start( "msgCurWep", self.Owner );
+		umsg.String( self:GetClass() );
+	umsg.End();
 	
 end
 

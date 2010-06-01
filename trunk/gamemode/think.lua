@@ -24,14 +24,20 @@ function GM:Think()
 		
 		if( v:FlashlightIsOn() ) then
 			
-			v:SetNWInt( "flashlightpwr", math.Clamp( v:GetNWInt( "flashlightpwr" ) - 0.25, 0, v:GetNWInt( "MaxFlashlight" ) ) );
-			v:SetNWInt( "lastFlashUpdate", CurTime() );
+			v.FlashlightPwr = math.Clamp( v.FlashlightPwr - 0.25, 0, v.MaxFlashlight );
+			umsg.Start( "msgFlashlightPwr", v );
+				umsg.Short( v.FlashlightPwr );
+			umsg.End();
+			v.LastFlashUpdate = CurTime();
 			
 		else
 			
-			if( CurTime() - v:GetNWInt( "lastFlashUpdate" ) >= 1 ) then
+			if( CurTime() - v.LastFlashUpdate >= 1 ) then
 				
-				v:SetNWInt( "flashlightpwr", math.Clamp( v:GetNWInt( "flashlightpwr" ) + 0.125, 0, v:GetNWInt( "MaxFlashlight" ) ) );
+				v.FlashlightPwr = math.Clamp( v.FlashlightPwr + 0.125, 0, v.MaxFlashlight );
+				umsg.Start( "msgFlashlightPwr", v );
+					umsg.Short( v.FlashlightPwr );
+				umsg.End();
 				
 			end
 			

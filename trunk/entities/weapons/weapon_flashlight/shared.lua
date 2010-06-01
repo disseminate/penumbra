@@ -32,7 +32,9 @@ end
 
 function SWEP:Deploy()
 	
-	self.Owner:SetNWString( "CurWep", "weapon_flashlight" );
+	umsg.Start( "msgCurWep", self.Owner );
+		umsg.String( self:GetClass() );
+	umsg.End();
 	
 end
 
