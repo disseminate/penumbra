@@ -197,7 +197,10 @@ function player:LoadData()
 		self.HasGlowstick = tobool( ftab[3] );
 		self.HasFlashbang = tobool( ftab[4] );
 		self.HasMolotov = tobool( ftab[5] );
-		self:SetNWInt( "MaxFlashlight", tonumber( ftab[6] ) );
+		self.MaxFlashlight = tonumber( ftab[6] );
+		umsg.Start( "msgMaxFlashlight", self );
+			umsg.Short( self.MaxFlashlight );
+		umsg.End();
 		
 	end
 	
@@ -214,7 +217,7 @@ function player:SaveData()
 		tostring( self.HasGlowstick ),
 		tostring( self.HasFlashbang ),
 		tostring( self.HasMolotov ),
-		tostring( self:GetNWInt( "MaxFlashlight" ) )
+		tostring( self.MaxFlashlight )
 	};
 	
 	file.Write( "penumbra/" .. sid .. ".txt", string.Implode( "$", str ) );

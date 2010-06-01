@@ -3,11 +3,15 @@ function GM:PlayerInitialSpawn( ply )
 	ply:SetTeam( TEAM_UNASSIGNED )
 	ply:SetMoney( 0 );
 	ply:SetNWInt( "IllumR", r );
-	ply:SetNWInt( "flashlightpwr", 100 );
-	ply:SetNWInt( "lastFlashUpdate", 0 );
-	ply:SetNWInt( "LastGlowstick", -30 );
-	ply:SetNWInt( "MaxFlashlight", 100 );
-	ply:SetNWInt( "CurWep", "weapon_flashlight" );
+	ply.LastFlashUpdate = 0;
+	ply.MaxFlashlight = 100;
+	ply.FlashlightPwr = 100;
+	umsg.Start( "msgMaxFlashlight", ply );
+		umsg.Short( ply.MaxFlashlight );
+	umsg.End();
+	umsg.Start( "msgFlashlightPwr", ply );
+		umsg.Short( ply.FlashlightPwr );
+	umsg.End();
 	
 	ply.HasLaserPointer = false;
 	ply.HasGlowstick = false;
@@ -34,11 +38,17 @@ function GM:PlayerInitialSpawn( ply )
 	
 	ply:LoadData();
 	
-	ply:SetNWInt( "flashlightpwr", ply:GetNWInt( "MaxFlashlight" ) );
+	ply.FlashlightPwr = ply.MaxFlashlight;
+	umsg.Start( "msgFlashlightPwr", ply );
+		umsg.Short( ply.MaxFlashlight );
+	umsg.End();
 	
 	timer.Simple( 1, function()
 		if( ply.HasLaserPointer ) then
-			ply:SetNWInt( "LaserAmmoLeft", 10 );
+			ply.LaserAmmoLeft = 10;
+			umsg.Start( "msgLaserAmmoLeft", ply );
+				umsg.Short( 10 );
+			umsg.End();
 			ply:Give( "weapon_laserpoint" );
 		end
 		
@@ -95,9 +105,16 @@ function GM:PlayerDeathSound() return true end
 function GM:DoPlayerDeath( ply, attacker, dmginfo )
 	
 	ply:SetNWInt( "IllumR", 0 );
-	ply:SetNWInt( "flashlightpwr", ply:GetNWInt( "MaxFlashlight" ) );
-	ply:SetNWInt( "lastFlashUpdate", 0 );
-	ply:SetNWInt( "LastGlowstick", -30 );
+	ply.LastFlashUpdate = 0;
+	
+	ply.FlashlightPwr = ply.MaxFlashlight;
+	umsg.Start( "msgFlashlightPwr", ply );
+		umsg.Short( ply.MaxFlashlight );
+	umsg.End();
+	
+	umsg.Start( "msgLastGlowstick", ply );
+		umsg.Short( -30 );
+	umsg.End();
 	
 	ply:CreateRagdoll() -- Below is base code
 	

@@ -38,10 +38,12 @@ function SWEP:PrimaryAttack()
 				"weapons/stunstick/spark3.wav"
 			}
 			self.Owner:EmitSound( Sound( snds[math.random( 1, #snds )] ) );
-			self.Weapon:SendWeaponAnim( ACT_VM_PRIMARYATTACK );
+			self:SendWeaponAnim( ACT_VM_PRIMARYATTACK );
 			self.Owner:SetAnimation( PLAYER_ATTACK1 );
 			
-			self.Owner:SetNWInt( "LastGlowstick", CurTime() );
+			umsg.Start( "msgLastGlowstick", self.Owner );
+				umsg.Short( CurTime() );
+			umsg.End();
 			
 			self.UsedUp = true;
 			
@@ -68,8 +70,10 @@ end
 
 function SWEP:Deploy()
 	
-	self.Weapon:SendWeaponAnim( ACT_VM_DRAW );
-	self.Owner:SetNWString( "CurWep", "weapon_glowstick" );
+	self:SendWeaponAnim( ACT_VM_DRAW );
+	umsg.Start( "msgCurWep", self.Owner );
+		umsg.String( self:GetClass() );
+	umsg.End();
 	
 end
 

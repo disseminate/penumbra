@@ -2,6 +2,16 @@ surface.CreateFont( "coolvetica", 40, 100, true, false, "PenumbraTextLarge" );
 surface.CreateFont( "coolvetica", 30, 100, true, false, "PenumbraTextMed" );
 surface.CreateFont( "coolvetica", 20, 100, true, false, "PenumbraText" );
 
+CurWep = "weapon_flashlight";
+
+function msgCurWep( um )
+	
+	local str = um:ReadString();
+	CurWep = str;
+	
+end
+usermessage.Hook( "msgCurWep", msgCurWep );
+
 function GM:HUDShouldDraw( name )
 	
 	local nodraw = 
@@ -118,17 +128,17 @@ function DrawWepData() -- This code SUCKS ( as in sucks )
 	local barX = ScrW() - 205;
 	local barY = ScrH() - 35 - 30;
 	
-	local class = LocalPlayer():GetNWString( "CurWep" ); -- Hack.
+	local class = CurWep; -- Hack.
 	
 	if( class == "weapon_flashlight" ) then
 		
-		draw.ProgressBar( 2, barX, barY, 200, 30, LocalPlayer():GetNWInt( "flashlightpwr" ) / LocalPlayer():GetNWInt( "MaxFlashlight" ), Color( 0, 0, 0, 200 ), Color( 220, 220, 220, 255 ) );
-		draw.DrawText( math.Round( LocalPlayer():GetNWInt( "flashlightpwr" ) / LocalPlayer():GetNWInt( "MaxFlashlight" ) * 100 ) .. "%", "PenumbraText", barX + 5, barY + 5, Color( 0, 0, 0, 255 ), 0 );
+		draw.ProgressBar( 2, barX, barY, 200, 30, FlashlightPwr / MaxFlashlight, Color( 0, 0, 0, 200 ), Color( 220, 220, 220, 255 ) );
+		draw.DrawText( math.Round( FlashlightPwr / MaxFlashlight * 100 ) .. "%", "PenumbraText", barX + 5, barY + 5, Color( 0, 0, 0, 255 ), 0 );
 		
 	elseif( class == "weapon_glowstick" ) then
 		
 		local mul = 1;
-		local LastGlow = LocalPlayer():GetNWInt( "LastGlowstick" );
+		local LastGlow = LastGlowstick;
 		
 		if( CurTime() - LastGlow <= 30 and CurTime() - LastGlow >= 0 ) then
 			
@@ -141,7 +151,7 @@ function DrawWepData() -- This code SUCKS ( as in sucks )
 		
 	elseif( class == "weapon_laserpoint" ) then
 		
-		local mul = LocalPlayer():GetNWInt( "LaserAmmoLeft" ) / 10;
+		local mul = LocalPlayer().LaserAmmoLeft / 10;
 		
 		draw.ProgressBar( 2, barX, barY, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 200, 0, 0, 255 ) );
 		draw.DrawText( mul * 10 .. "/10", "PenumbraText", barX + 5, barY + 5, Color( 0, 0, 0, 255 ), 0 );
@@ -228,7 +238,7 @@ function DrawScoreboard()
 			surface.DrawText( v:Nick() );
 			
 			surface.SetTextPos( basex + 400, basey + 5 );
-			surface.DrawText( v:Money() );
+			surface.DrawText( "$" .. v:Money() );
 			
 			surface.SetTextPos( basex + 460, basey + 5 );
 			surface.DrawText( v:Ping() );
