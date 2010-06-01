@@ -153,8 +153,15 @@ function DrawWepData() -- This code SUCKS ( as in sucks )
 		
 		local mul = LocalPlayer().LaserAmmoLeft / 10;
 		
-		draw.ProgressBar( 2, barX, barY, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 200, 0, 0, 255 ) );
+		draw.ProgressBar( 2, barX, barY, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 150, 0, 0, 255 ) );
 		draw.DrawText( mul * 10 .. "/10", "PenumbraText", barX + 5, barY + 5, Color( 0, 0, 0, 255 ), 0 );
+		
+	elseif( class == "weapon_uvlauncher" ) then
+		
+		local mul = LocalPlayer().UVAmmoLeft / 80;
+		
+		draw.ProgressBar( 2, barX, barY, 200, 30, mul, Color( 0, 0, 0, 200 ), Color( 70, 0, 128, 255 ) );
+		draw.DrawText( mul * 80 .. "/80", "PenumbraText", barX + 5, barY + 5, Color( 0, 0, 0, 255 ), 0 );
 		
 	elseif( class == "weapon_flashbang" ) then
 		
@@ -165,6 +172,11 @@ function DrawWepData() -- This code SUCKS ( as in sucks )
 		
 		draw.ProgressBar( 2, barX, barY, 200, 30, 1, Color( 0, 0, 0, 200 ), Color( 255, 100, 0, 255 ) );
 		draw.DrawText( "1 Molotov Cocktail", "PenumbraText", barX + 5, barY + 5, Color( 0, 0, 0, 255 ), 0 );
+		
+	elseif( class == "weapon_flaregun" ) then
+		
+		draw.ProgressBar( 2, barX, barY, 200, 30, 1, Color( 0, 0, 0, 200 ), Color( 255, 0, 0, 255 ) );
+		draw.DrawText( "1 Flare", "PenumbraText", barX + 5, barY + 5, Color( 0, 0, 0, 255 ), 0 );
 		
 	end
 	

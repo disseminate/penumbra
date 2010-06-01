@@ -54,6 +54,15 @@ function buyItem( ply, cmd, args )
 			ply.LaserAmmoLeft = 10;
 			
 		end
+		if( wep == "weapon_uvlauncher" ) then
+			
+			umsg.Start( "msgUVAmmoLeft", ply );
+				umsg.Short( 80 );
+			umsg.End();
+			
+			ply.UVAmmoLeft = 80;
+			
+		end
 		itemdata[6]( ply );
 		ply:SaveData();
 		ply:PrintMessage( 3, "You recieved a " .. name .. "." );

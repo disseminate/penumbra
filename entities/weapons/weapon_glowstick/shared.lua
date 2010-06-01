@@ -1,10 +1,11 @@
 if( SERVER ) then
 	
 	AddCSLuaFile( "shared.lua" );
-	SWEP.HoldType = "melee";
 	SWEP.FOVAmt = 20;
 	
 end
+
+SWEP.HoldType = "melee";
 
 SWEP.PrintName = "Glowstick";
 
@@ -23,6 +24,12 @@ end
 SWEP.WorldModel = "models/weapons/W_stunbaton.mdl";
 SWEP.ViewModel = "models/weapons/v_stunstick.mdl";
 SWEP.UsedUp = false;
+
+function SWEP:Initialize()
+	
+	self:SetWeaponHoldType( self.HoldType );
+	
+end
 
 function SWEP:PrimaryAttack()
 	

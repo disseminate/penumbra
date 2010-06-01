@@ -1,10 +1,11 @@
 if( SERVER ) then
 	
 	AddCSLuaFile( "shared.lua" );
-	SWEP.HoldType = "grenade";
 	SWEP.FOVAmt = 20;
 	
 end
+
+SWEP.HoldType = "grenade";
 
 SWEP.PrintName = "Flashbang";
 
@@ -23,11 +24,18 @@ end
 SWEP.WorldModel = "models/Weapons/w_grenade.mdl";
 SWEP.ViewModel = "models/Weapons/v_grenade.mdl";
 
+function SWEP:Initialize()
+	
+	self:SetWeaponHoldType( self.HoldType );
+	
+end
+
 function SWEP:PrimaryAttack()
 	
 	if( SERVER ) then
 		
 		self:SendWeaponAnim( ACT_VM_THROW );
+		self.Owner:SetAnimation( PLAYER_ATTACK1 );
 		
 		timer.Simple( 0.3, function()
 			

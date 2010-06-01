@@ -1,0 +1,8 @@
+"UnlitGeneric"
+{
+	"$basetexture"	"penumbra/uvlaser"
+	"$nocull"		1
+	"$MinLight"		1
+	"$MaxLight"		1
+	"$additive"		1
+}

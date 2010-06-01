@@ -70,6 +70,19 @@ BUY_ITEMS = {
 		end
 	},
 	{
+		"Ultraviolet Laser Pointer",
+		"Ultraviolet? More like ultraVIOLENT.",
+		275,
+		"weapon_uvlauncher",
+		"models/weapons/w_irifle.mdl",
+		function( ply )
+			ply.HasUVLauncher = true;
+		end,
+		function( ply )
+			return ply.HasUVLauncher;
+		end
+	},
+	{
 		"Molotov Cocktail",
 		"Think of it as a stationary turret, but cooler and with fire.",
 		275,
@@ -101,7 +114,20 @@ BUY_ITEMS = {
 		function( ply )
 			return ( ply:GetNWInt( "MaxFlashlight" ) == 300 );
 		end
-	}
+	},
+	{
+		"Flare Launcher",
+		"FWOOMP!",
+		400,
+		"weapon_flaregun",
+		"models/weapons/w_rocket_launcher.mdl",
+		function( ply )
+			ply.HasFlare = true;
+		end,
+		function( ply )
+			return ply.HasFlare;
+		end
+	},
 }
 
 NIGHT_LEN = 180;

@@ -141,7 +141,7 @@ function player:ShadowKill( ent )
 	
 	if( CurTime() - self.LastSpawn > 5 ) then -- Spawn protection
 		
-		self:SetMoney( self:Money() - 10 );
+		self:SetMoney( self:Money() - 5 );
 		if( self:Money() < 0 ) then self:SetMoney( 0 ) end
 		
 		self:SaveData();
@@ -194,10 +194,12 @@ function player:LoadData()
 		
 		self:SetMoney( tonumber( ftab[1] ) );
 		self.HasLaserPointer = tobool( ftab[2] );
-		self.HasGlowstick = tobool( ftab[3] );
-		self.HasFlashbang = tobool( ftab[4] );
-		self.HasMolotov = tobool( ftab[5] );
-		self.MaxFlashlight = tonumber( ftab[6] );
+		self.HasUVLauncher = tobool( ftab[3] );
+		self.HasGlowstick = tobool( ftab[4] );
+		self.HasFlashbang = tobool( ftab[5] );
+		self.HasMolotov = tobool( ftab[6] );
+		self.HasFlare = tobool( ftab[7] );
+		self.MaxFlashlight = tonumber( ftab[8] );
 		umsg.Start( "msgMaxFlashlight", self );
 			umsg.Short( self.MaxFlashlight );
 		umsg.End();
@@ -214,9 +216,11 @@ function player:SaveData()
 	local str = {
 		self:Money(),
 		tostring( self.HasLaserPointer ),
+		tostring( self.HasUVLauncher ),
 		tostring( self.HasGlowstick ),
 		tostring( self.HasFlashbang ),
 		tostring( self.HasMolotov ),
+		tostring( self.HasFlare ),
 		tostring( self.MaxFlashlight )
 	};
 	

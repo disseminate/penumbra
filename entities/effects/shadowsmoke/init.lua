@@ -6,7 +6,7 @@ function EFFECT:Init(data)
 	
 	for j = 1, numParts do
 	
-		local particle = emitter:Add( "sprites/shadow", ePos );
+		local particle = emitter:Add( "penumbra/shadow", ePos );
 		
 		if( particle ) then
 			
