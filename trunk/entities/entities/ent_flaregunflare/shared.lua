@@ -1,7 +1,7 @@
-ENT.Base = "base_ai";
-ENT.Type = "ai";
+ENT.Base = "base_anim";
+ENT.Type = "anim";
 
-ENT.PrintName 		= "Shadow";
+ENT.PrintName 		= "Flare";
 ENT.Author			= "Disseminate";
 ENT.Contact 		= "";
 ENT.Information		= "";
